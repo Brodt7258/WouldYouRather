@@ -1,7 +1,13 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { handleInitialData } from '../actions/shared';
 import PollList from './PollList';
 
 class App extends Component {
+  componentDidMount() {
+    this.props.dispatch(handleInitialData());
+  }
+
   render() {
     return (
       <div>
@@ -13,4 +19,10 @@ class App extends Component {
   }
 }
 
-export default App;
+// const mapStateToProps = ({ authedUser }) => {
+//   return {
+//     loading: authedUser === null
+//   };
+// };
+
+export default connect()(App);
