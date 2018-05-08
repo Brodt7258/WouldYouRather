@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
+import Question from './Question';
 
 class QuestionList extends Component {
   render() {
@@ -10,7 +11,7 @@ class QuestionList extends Component {
         <h3 className="center">QuestionList {this.props.type}</h3>
         {
           questions
-            ? questions.map(q => <div className="center" key={q.id}>{q.id}</div>)
+            ? questions.map(q => <Question key={q} id={q} />)
             : <div className="center">No questions yet</div>
         }
       </div>
@@ -24,14 +25,20 @@ const mapStateToProps = ({ authedUser, questions }, { type }) => {
       return {
         authedUser,
         questions: questions
-          ? Object.values(questions).filter(q => !q.optionOne.votes.includes(authedUser) && !q.optionTwo.votes.includes(authedUser))
+          ? Object.values(questions)
+            .filter(q => !q.optionOne.votes.includes(authedUser) && !q.optionTwo.votes.includes(authedUser))
+            .sort((a, b) => b.timestamp - a.timestamp)
+            .map(q => q.id)
           : []
       };
     case 'answered':
       return {
         authedUser,
         questions: questions 
-          ? Object.values(questions).filter(q => q.optionOne.votes.includes(authedUser) || q.optionTwo.votes.includes(authedUser)) 
+          ? Object.values(questions)
+            .filter(q => q.optionOne.votes.includes(authedUser) || q.optionTwo.votes.includes(authedUser))
+            .sort((a, b) => b.timestamp - a.timestamp)
+            .map(q => q.id)
           : []
       };
     default:
