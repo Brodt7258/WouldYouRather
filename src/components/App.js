@@ -1,7 +1,8 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
+import LoadingBar from 'react-redux-loading';
 import { handleInitialData } from '../actions/shared';
-import PollList from './PollList';
+import Dashboard from './Dashboard';
 
 class App extends Component {
   componentDidMount() {
@@ -10,19 +11,21 @@ class App extends Component {
 
   render() {
     return (
-      <div>
-        <div>App</div>
-        <PollList />
-        <PollList />
-      </div>
+      <Fragment>
+        <LoadingBar />
+        <div className="container">
+          <div>App</div>
+          <Dashboard />
+        </div>
+      </Fragment>
     );
   }
 }
 
-// const mapStateToProps = ({ authedUser }) => {
-//   return {
-//     loading: authedUser === null
-//   };
-// };
+const mapStateToProps = ({ authedUser }) => {
+  return {
+    loading: authedUser === null
+  };
+};
 
-export default connect()(App);
+export default connect(mapStateToProps)(App);
