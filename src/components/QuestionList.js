@@ -6,7 +6,7 @@ class QuestionList extends Component {
   render() {
     const { questions } = this.props;
     return (
-      <div>
+      <div className="tile is-ancestor is-vertical">
         <h3 className="center">QuestionList {this.props.type}</h3>
         {
           questions
