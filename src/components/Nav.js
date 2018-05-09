@@ -18,10 +18,10 @@ class Nav extends Component {
             <NavLink to="/" exact className="navbar-item">
               Home
             </NavLink>
-            <NavLink to="/" className="navbar-item">
-              Leaderboards
+            <NavLink to="/leaderboard" className="navbar-item">
+              Leaderboard
             </NavLink>
-            <NavLink to="/" className="navbar-item">
+            <NavLink to="/new" className="navbar-item">
               Ask
             </NavLink>
           </div>

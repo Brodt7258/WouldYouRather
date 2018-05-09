@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { NavLink } from 'react-router-dom';
 
 class Question extends Component {
   render() {
     const { id, question: { optionOne, optionTwo } } = this.props;
 
     return (
-      <div className="tile is-parent">
+      <NavLink to={`/question/${id}`} className="tile is-parent">
         <div className="card tile is-child">
           <header className="card-header">
             <p className="card-header-title">
@@ -20,7 +21,7 @@ class Question extends Component {
             </div>
           </div>
         </div>
-      </div>
+      </NavLink>
       
     );
   }
