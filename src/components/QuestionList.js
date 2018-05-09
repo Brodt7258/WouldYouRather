@@ -5,7 +5,6 @@ import Question from './Question';
 class QuestionList extends Component {
   render() {
     const { questions } = this.props;
-    console.log(`${this.props.type}`, this.props);
     return (
       <div>
         <h3 className="center">QuestionList {this.props.type}</h3>
@@ -21,7 +20,7 @@ class QuestionList extends Component {
 
 const mapStateToProps = ({ authedUser, questions }, { type }) => {
   switch (type) {
-    case 'unanswered':
+    case 'new':
       return {
         authedUser,
         questions: questions
