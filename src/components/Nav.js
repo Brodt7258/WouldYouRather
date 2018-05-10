@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
-import { NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { Toolbar, ToolbarTitle, ToolbarGroup } from 'material-ui/Toolbar';
+import { Toolbar, ToolbarGroup } from 'material-ui/Toolbar';
+import RaisedButton from 'material-ui/RaisedButton';
+import Avatar from 'material-ui/Avatar';
 import logo from '../images/WYR-01.png';
 
 class Nav extends Component {
@@ -11,39 +13,35 @@ class Nav extends Component {
     return (
       <Toolbar>
         <ToolbarGroup>
-          <NavLink to="/" exact className="navbar-item">
-            <img src={logo} alt="Would you Rather..?"/>
-          </NavLink>
-          <NavLink to="/" exact className="navbar-item">
-            Home
-          </NavLink>
-          <NavLink to="/leaderboard" className="navbar-item">
-            Leaderboard
-          </NavLink>
-          <NavLink to="/new" className="navbar-item">
-            Ask
-          </NavLink>
-        </ToolbarGroup>
+          <Link to="/" >
+            <Avatar>
+              <img src={logo} alt="Would you Rather..?" height="100" width="100" />
+            </Avatar>
+          </Link>
+          <RaisedButton label="Home" containerElement={<Link to="/" />}/>
+          <RaisedButton label="Leaderboard" containerElement={<Link to="/leaderboard" />}/>
+          <RaisedButton label="Ask" containerElement={<Link to="/new" />}/>
+        </ToolbarGroup> 
       </Toolbar>
     );
     // return (
     //   <nav className="navbar">
     //     <div className="navbar-brand">
-    //       <NavLink to="/" exact className="navbar-item">
+    //       <Link to="/" exact className="navbar-item">
     //         <img src={logo} alt="Would you Rather..?"/>
-    //       </NavLink>
+    //       </Link>
     //     </div>
     //     <div className="navbar-menu">
     //       <div className="navbar-start">
-    //         <NavLink to="/" exact className="navbar-item">
+    //         <Link to="/" exact className="navbar-item">
     //           Home
-    //         </NavLink>
-    //         <NavLink to="/leaderboard" className="navbar-item">
+    //         </Link>
+    //         <Link to="/leaderboard" className="navbar-item">
     //           Leaderboard
-    //         </NavLink>
-    //         <NavLink to="/new" className="navbar-item">
+    //         </Link>
+    //         <Link to="/new" className="navbar-item">
     //           Ask
-    //         </NavLink>
+    //         </Link>
     //       </div>
     //       <div className="navbar-end">
     //         <div className="navbar-item">
