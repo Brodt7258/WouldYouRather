@@ -1,35 +1,35 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 class Question extends Component {
   render() {
-    const { id, question: { optionOne, optionTwo } } = this.props;
+    const { id, question: {optionOne, optionTwo }, author } = this.props;
 
     return (
-      <NavLink to={`/question/${id}`} className="tile is-parent">
+      <Link to={`/question/${id}`} className="tile is-parent">
         <div className="card tile is-child">
-          <header className="card-header">
-            <p className="card-header-title">
-              Question {id}
-            </p>
-          </header>
-          <div className="card-content tile is-ancestor">
-            <div className="content tile is-parent">
-              <div className="tile is-child">{optionOne.text}</div>
-              <div className="tile is-child">{optionTwo.text}</div>
+          <div className="card-content">
+            <div className="content">
+              <p className="title is-5">{`${author.name} asks:`}</p>
+              <p className="subtitle is-6">Would you Rather...?</p>
             </div>
+            <footer className="card-footer">
+              <p className="card-footer-item">{optionOne.text}</p>
+              <p className="card-footer-item">{optionTwo.text}</p>
+            </footer>
           </div>
         </div>
-      </NavLink>
+      </Link>
       
     );
   }
 }
 
-const mapStateToProps = ({ questions }, { id }) => {
+const mapStateToProps = ({ questions, users }, { id }) => {
   return {
-    question: questions[id]
+    question: questions[id],
+    author: users[questions[id].author]
   };
 };
 
