@@ -1,27 +1,34 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { Toolbar, ToolbarGroup } from 'material-ui/Toolbar';
-import RaisedButton from 'material-ui/RaisedButton';
-import Avatar from 'material-ui/Avatar';
-import logo from '../images/WYR-01.png';
+import Toolbar from 'material-ui-next/Toolbar';
+import Button from 'material-ui-next/Button';
+import Avatar from 'material-ui-next/Avatar';
+import logo from '../images/icon-01.png';
+
 
 class Nav extends Component {
+  styles = {
+    avatar: {
+      margin: 10,
+    },
+  }
+  
   render() {
     const { user } = this.props;
 
     return (
       <Toolbar>
-        <ToolbarGroup>
-          <Link to="/" >
-            <Avatar>
-              <img src={logo} alt="Would you Rather..?" height="100" width="100" />
-            </Avatar>
-          </Link>
-          <RaisedButton label="Home" containerElement={<Link to="/" />}/>
-          <RaisedButton label="Leaderboard" containerElement={<Link to="/leaderboard" />}/>
-          <RaisedButton label="Ask" containerElement={<Link to="/new" />}/>
-        </ToolbarGroup> 
+          <Avatar src={logo} alt="Would you Rather..?" component={Link} to="/" style={{marginRight: 15}} />
+          <Button component={Link} to="/">
+            Home
+          </Button>
+          <Button component={Link} to="/leaderboard">
+            Leaderboard
+          </Button>
+          <Button component={Link} to="/new">
+            Ask
+          </Button>
       </Toolbar>
     );
     // return (

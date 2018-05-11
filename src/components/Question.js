@@ -1,14 +1,21 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { Card, CardHeader } from 'material-ui/Card'
 
 class Question extends Component {
   render() {
     const { id, question: {optionOne, optionTwo }, author } = this.props;
 
     return (
-      <Link to={`/question/${id}`} className="tile is-parent">
-        <div className="card tile is-child">
+      <Link to={`/question/${id}`}>
+        <Card>
+          <CardHeader title={`${author.name} asks:`}/>
+        </Card>
+      
+      
+      
+        {/*<div className="card tile is-child">
           <div className="card-content">
             <div className="content">
               <p className="title is-5">{`${author.name} asks:`}</p>
@@ -19,7 +26,7 @@ class Question extends Component {
               <p className="card-footer-item">{optionTwo.text}</p>
             </footer>
           </div>
-        </div>
+        </div>*/}
       </Link>
       
     );
