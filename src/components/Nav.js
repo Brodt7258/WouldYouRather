@@ -5,6 +5,7 @@ import Toolbar from 'material-ui-next/Toolbar';
 import Button from 'material-ui-next/Button';
 import Avatar from 'material-ui-next/Avatar';
 import logo from '../images/icon-01.png';
+import AuthMenu from './AuthMenu';
 
 
 class Nav extends Component {
@@ -29,6 +30,7 @@ class Nav extends Component {
           <Button component={Link} to="/new">
             Ask
           </Button>
+          <AuthMenu />
       </Toolbar>
     );
     // return (
