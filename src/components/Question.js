@@ -11,6 +11,12 @@ class Question extends Component {
       <Link to={`/question/${id}`}>
         <Card>
           <CardHeader title={`${author.name} asks:`}/>
+          <div>
+            {optionOne.text}
+          </div>
+          <div>
+            {optionTwo.text}
+          </div>
         </Card>
       
       
