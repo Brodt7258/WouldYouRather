@@ -1,30 +1,42 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { setAuthedUser } from '../actions/authedUser';
 
 class AuthMenu extends Component {
+  handleSetUser = e => {
+    const { dispatch } = this.props;
+
+    dispatch(setAuthedUser(e.target.value));
+  }
+  
   render() {
-    const { users } = this.props;
+    const { users, loading } = this.props;
 
     return (
       <div>
-        <select>
-          {
-            users.map(u => (
-              <option key={u.id}>{u.name}</option>
-            ))
-          }
-        </select>
+      {
+        loading
+        ? null
+        : <select onChange={this.handleSetUser}>
+            {
+              users.map(u => (
+                <option key={u.id} value={u.id}>{u.name}</option>
+              )) 
+            }
+          </select>
+      }
       </div>
     );
   }
 }
 
-const mapStateToProps = ({ users }) => {
+const mapStateToProps = ({ users, authedUser }) => {
   return {
     users: users
       ? Object.values(users)
         .map(({ id, name }) => ({ id, name }))
-      : []
+      : [],
+    loading: authedUser === null
   };
 };
 
