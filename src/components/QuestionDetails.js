@@ -1,9 +1,19 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { handleCastVote } from '../actions/shared';
 
 class QuestionDetails extends Component {
+  handleVote = answer => {
+    const { id, dispatch } = this.props;
+
+    dispatch(handleCastVote({
+      qid: id,
+      answer
+    }));
+  };
+
   render() {
-    const { answered, id, question, author } = this.props;
+    const { answered, id, question: { optionOne, optionTwo  }, author } = this.props;
 
     return (
       <div>
@@ -11,8 +21,19 @@ class QuestionDetails extends Component {
         <div>{`${answered}`}</div>
         <div>{id}</div>
         <div>{author.name}</div>
-        <div>{question.optionOne.text}</div>
-        <div>{question.optionTwo.text}</div>
+        <div>1 {optionOne.text}</div>
+        <div>2 {optionTwo.text}</div>
+        {
+          !answered &&
+          <div>
+            <button onClick={() => this.handleVote('optionOne')}>
+              1
+            </button>
+            <button onClick={() => this.handleVote('optionTwo')}>
+              2
+            </button>
+          </div>
+        }
       </div>
     );
   }

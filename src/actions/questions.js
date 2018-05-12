@@ -4,6 +4,7 @@ import { showLoading, hideLoading } from 'react-redux-loading';
 export const RECEIVE_QUESTIONS = 'RECEIVE_QUESTIONS';
 export const ADD_QUESTION = 'ADD_QUESTION';
 
+
 export const receiveQuestions = (questions) => {
   return {
     type: RECEIVE_QUESTIONS,
@@ -28,6 +29,7 @@ export const handleAddQuestion = ({ optionOne, optionTwo }) => (dispatch, getSta
     optionOneText: optionOne,
     optionTwoText: optionTwo
   })
-    .then((question) => dispatch(addQuestion(question)))
+    .then(question => dispatch(addQuestion(question)))
     .then(() => (dispatch(hideLoading())));
 };
+
