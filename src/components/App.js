@@ -8,6 +8,7 @@ import Nav from './Nav';
 import NewQuestion from './NewQuestion';
 import Leaderboard from './Leaderboard';
 import QuestionDetails from './QuestionDetails';
+import NotFound from './NotFound';
 
 class App extends Component {
   componentDidMount() {
@@ -28,6 +29,7 @@ class App extends Component {
                   <Route path="/leaderboard" component={Leaderboard} />
                   <Route path="/new" component={NewQuestion} />
                   <Route path="/question/:id" component={QuestionDetails} />
+                  <Route component={NotFound}/>
                 </div>
             }
           </div>
