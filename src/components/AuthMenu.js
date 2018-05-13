@@ -10,14 +10,14 @@ class AuthMenu extends Component {
   }
   
   render() {
-    const { users, loading } = this.props;
+    const { authedUser, users, loading } = this.props;
 
     return (
       <div>
       {
         loading
         ? null
-        : <select onChange={this.handleSetUser}>
+        : <select value={authedUser} onChange={this.handleSetUser}>
             {
               users.map(u => (
                 <option key={u.id} value={u.id}>{u.name}</option>
@@ -32,6 +32,7 @@ class AuthMenu extends Component {
 
 const mapStateToProps = ({ users, authedUser }) => {
   return {
+    authedUser,
     users: users
       ? Object.values(users)
         .map(({ id, name }) => ({ id, name }))
