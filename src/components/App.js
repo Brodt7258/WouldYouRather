@@ -10,6 +10,7 @@ import Leaderboard from './Leaderboard';
 import QuestionDetails from './QuestionDetails';
 import NotFound from './NotFound';
 import PrivateRoute from './PrivateRoute';
+import Login from './Login';
 
 class App extends Component {
   componentDidMount() {
@@ -28,6 +29,7 @@ class App extends Component {
               : <Switch>
                   <Route path="/" exact component={Dashboard} />
                   <Route path="/leaderboard" component={Leaderboard} />
+                  <Route path="login" component={Login} />
                   <PrivateRoute path="/new" component={NewQuestion} />
                   <PrivateRoute path="/question/:id" component={QuestionDetails} />
                   <Route component={NotFound}/>

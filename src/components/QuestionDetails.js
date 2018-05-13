@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 import { handleCastVote } from '../actions/shared';
+import NotFound from './NotFound';
 
 class QuestionDetails extends Component {
   handleVote = answer => {
@@ -13,7 +15,13 @@ class QuestionDetails extends Component {
   };
 
   render() {
-    const { answered, id, question: { optionOne, optionTwo  }, author } = this.props;
+    const { answered = false, id, question: { optionOne, optionTwo } = {}, author = '', notFound } = this.props;
+
+    if (notFound) {
+      return (
+        <NotFound />
+      );
+    }
 
     return (
       <div>
@@ -41,13 +49,22 @@ class QuestionDetails extends Component {
 
 const mapStateToProps = ({questions, users, authedUser}, props) => {
   const { id } = props.match.params;
+  console.log(!!questions[id]);
 
-  return {
-    id,
-    answered: questions[id].optionOne.votes.includes(authedUser) || questions[id].optionTwo.votes.includes(authedUser),
-    question: questions[id],
-    author: users[questions[id].author]
-  };
+  if (questions[id]) {
+    return {
+      id,
+      answered: questions[id].optionOne.votes.includes(authedUser) || questions[id].optionTwo.votes.includes(authedUser),
+      question: questions[id],
+      author: users[questions[id].author]
+    };
+  } else {
+    return {
+      id,
+      notFound: true
+    }
+  }
+  
 };
 
 export default connect(mapStateToProps)(QuestionDetails);

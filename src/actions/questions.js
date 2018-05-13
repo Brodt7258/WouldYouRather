@@ -30,7 +30,7 @@ export const handleAddQuestion = ({ optionOne, optionTwo }) => (dispatch, getSta
     optionTwoText: optionTwo
   })
     .then(question => dispatch(addQuestion(question)))
-    .then((question) => {
+    .then(question => {
       dispatch(hideLoading())
       return question;
     });
