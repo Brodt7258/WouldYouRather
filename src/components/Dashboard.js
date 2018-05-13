@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
-import { Tabs, Tab } from 'material-ui/Tabs';
+import Tabs, { Tab } from 'material-ui-next/Tabs';
 import QuestionList from './QuestionList';
 
 class Dashboard extends Component {
   state = {
-    value: 'a'
+    value: 'b'
   }
   
-  handleChange = (value) => {
+  handleChange = (event, value) => {
     this.setState({
       value
     });
@@ -17,17 +17,19 @@ class Dashboard extends Component {
     const { value } = this.state;
 
     return (
-      <Tabs
-        value={value}
-        onChange={this.handleChange}
-      >
-        <Tab label="New" value="a">
-          <QuestionList type="new" />
-        </Tab>
-        <Tab label="Answered" value="b">
-          <QuestionList type="answered" />
-        </Tab>
-      </Tabs>
+      <div>
+        <Tabs
+          value={value}
+          onChange={this.handleChange}
+        >
+          <Tab label="New" value="a" />
+          <Tab label="Answered" value="b" />
+        </Tabs>
+
+        {value === 'a' && <QuestionList type="new" />}
+        {value === 'b' && <QuestionList type="answered" />}
+      </div>
+      
     );
 
     // return (

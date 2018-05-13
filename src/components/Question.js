@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { Card, CardHeader } from 'material-ui/Card'
 
 class Question extends Component {
   render() {
@@ -9,15 +8,13 @@ class Question extends Component {
 
     return (
       <Link to={`/question/${id}`}>
-        <Card>
-          <CardHeader title={`${author.name} asks:`}/>
+         <div>{`${author.name} asks:`}</div>
           <div>
             {optionOne.text}
           </div>
           <div>
             {optionTwo.text}
           </div>
-        </Card>
       
       
       
