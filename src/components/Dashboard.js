@@ -4,7 +4,7 @@ import QuestionList from './QuestionList';
 
 class Dashboard extends Component {
   state = {
-    value: 'b'
+    value: 'a'
   }
   
   handleChange = (event, value) => {

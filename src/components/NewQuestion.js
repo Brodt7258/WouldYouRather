@@ -7,7 +7,7 @@ class NewQuestion extends Component {
   state = {
     optionOne: '',
     optionTwo: '',
-    toHome: false
+    newQID: ''
   };
 
   handleChange = key => e => {
@@ -19,18 +19,19 @@ class NewQuestion extends Component {
     const { optionOne, optionTwo } = this.state;
     const { dispatch } = this.props;
 
-    dispatch(handleAddQuestion({ optionOne, optionTwo }));
-
-    this.setState({
-      toHome: true
-    });
+    dispatch(handleAddQuestion({ optionOne, optionTwo }))
+      .then(res => {
+        this.setState({
+          newQID: res.question.id
+        });
+      });
   }
   
   render() {
-    const { optionOne, optionTwo, toHome } = this.state;
+    const { optionOne, optionTwo, newQID } = this.state;
 
-    if (toHome) {
-      return <Redirect to="/" />;
+    if (newQID) {
+      return <Redirect to={`/question/${newQID}`} />;
     }
 
     const oneLeft = 280 - optionOne.length;
