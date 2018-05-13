@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Tabs, { Tab } from 'material-ui-next/Tabs';
+import Paper from 'material-ui-next/Paper';
 import QuestionList from './QuestionList';
 
 class Dashboard extends Component {
@@ -18,17 +19,20 @@ class Dashboard extends Component {
 
     return (
       <div>
-        <Tabs
-          value={value}
-          onChange={this.handleChange}
-        >
-          <Tab label="New" value="a" />
-          <Tab label="Answered" value="b" />
-        </Tabs>
-
+        <Paper>
+          <Tabs
+            value={value}
+            onChange={this.handleChange}
+            centered
+          >
+            <Tab label="New" value="a" />
+            <Tab label="Answered" value="b" />
+          </Tabs>
+        </Paper>
         {value === 'a' && <QuestionList type="new" />}
         {value === 'b' && <QuestionList type="answered" />}
       </div>
+      
       
     );
 

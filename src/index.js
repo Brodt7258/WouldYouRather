@@ -4,13 +4,26 @@ import './index.css';
 import App from './components/App';
 import { createStore } from 'redux';
 import { Provider} from 'react-redux';
+import { MuiThemeProvider, createMuiTheme } from 'material-ui-next/styles';
+import pink from 'material-ui-next/colors/pink';
 import middleware from './middleware';
 import reducer from './reducers';
 
 const store = createStore(reducer, middleware);
 
+const theme = createMuiTheme({
+  palette: {
+    primary: {
+      main: '#b0bec5',
+    },
+    secondary: pink
+  },
+});
+
 ReactDOM.render(
+  <MuiThemeProvider theme={theme}>
     <Provider store={store}>
       <App />
-    </Provider>,
+    </Provider>
+  </MuiThemeProvider>,
   document.getElementById('root'));

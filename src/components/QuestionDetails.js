@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Redirect } from 'react-router-dom';
 import { handleCastVote } from '../actions/shared';
 import NotFound from './NotFound';
 
@@ -40,6 +39,20 @@ class QuestionDetails extends Component {
             <button onClick={() => this.handleVote('optionTwo')}>
               2
             </button>
+          </div>
+        }
+        {
+          answered &&
+          <div>
+            <div>
+              Total Votes: {optionOne.votes.length + optionTwo.votes.length}
+            </div>
+            <div>
+              Votes for One: {optionOne.votes.length}
+            </div>
+            <div>
+              Votes for Two: {optionTwo.votes.length}
+            </div>
           </div>
         }
       </div>

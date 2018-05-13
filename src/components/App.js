@@ -22,7 +22,7 @@ class App extends Component {
       <Router>
         <Fragment>
           <LoadingBar />
-          <div className="container">
+          <div style={{ maxWidth: '50rem', margin: 'auto' }}>
             <Nav />
             {this.props.loading === true
               ? null
