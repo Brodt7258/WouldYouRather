@@ -12,40 +12,37 @@ class Question extends Component {
     const date = moment(timestamp).format('MMM Do, YYYY | h:mm a');
 
     return (
-      <Link to={`/question/${id}`} style={{ margin: 20, textDecoration: 'none', color: 'black' }}>
-         <Card>
-         <Paper style={{ display: 'flex', backgroundColor: '#b0bec5', padding: '10px' }}>
-            <div style={{ flex: 1 }}>
-              <div>{`${author.name} asks:`}</div>
-              <div>{date}</div>
+      <Card>
+        <Paper style={{ display: 'flex', backgroundColor: '#b0bec5', padding: '10px' }}>
+          <div style={{ flex: 1 }}>
+            <div>{`${author.name} asks:`}</div>
+            <div>{date}</div>
+          </div>
+          <div style={{ flex: 1, textAlign: 'right' }}>
+            <div>Likes</div>
+            <div>Comments</div>
+          </div>
+        </Paper>
+        <CardContent>
+          <p style={{ textAlign: 'center' }}>Would You Rather?</p>
+          <div style={{ flex: 1, display: 'flex' }}>
+            <div style={{ flex: 1, textAlign: 'center', marginRight: '10px' }}>
+            <Paper style={{ minHeight: '3rem', padding: '1rem', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+              <p>
+                {optionOne.text}
+              </p>
+            </Paper>
             </div>
-            <div style={{ flex: 1, textAlign: 'right' }}>
-              <div>Likes</div>
-              <div>Comments</div>
+            <div style={{ flex: 1, textAlign: 'center', marginLeft: '10px' }}>
+            <Paper style={{ minHeight: '3rem', padding: '1rem', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+              <p>
+                {optionTwo.text}
+              </p>
+            </Paper>
             </div>
-          </Paper>
-          <CardContent>
-            <h4 style={{ textAlign: 'center' }}>Would You Rather?</h4>
-            <div style={{ flex: 1, display: 'flex' }}>
-              <div style={{ flex: 1, textAlign: 'center', marginRight: '10px' }}>
-              <Paper style={{ minHeight: '3rem', padding: '1rem', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                <div>
-                  {optionOne.text}
-                </div>
-              </Paper>
-              </div>
-              <div style={{ flex: 1, textAlign: 'center', marginLeft: '10px' }}>
-              <Paper style={{ minHeight: '3rem', padding: '1rem', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                <div>
-                  {optionTwo.text}
-                </div>
-              </Paper>
-              </div>
-            </div>
-          </CardContent>
-         </Card>
-      </Link>
-      
+          </div>
+        </CardContent>
+      </Card>  
     );
   }
 }

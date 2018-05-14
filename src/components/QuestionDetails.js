@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import Card, { CardContent } from 'material-ui-next/Card';
+import Paper from 'material-ui-next/Paper';
 import { handleCastVote } from '../actions/shared';
 import NotFound from './NotFound';
+import Question from './Question';
 
 class QuestionDetails extends Component {
   handleVote = answer => {
@@ -23,39 +26,43 @@ class QuestionDetails extends Component {
     }
 
     return (
-      <div>
-        <div>QuestionDetails</div>
-        <div>{`${answered}`}</div>
-        <div>{id}</div>
-        <div>{author.name}</div>
-        <div>1 {optionOne.text}</div>
-        <div>2 {optionTwo.text}</div>
-        {
-          !answered &&
-          <div>
-            <button onClick={() => this.handleVote('optionOne')}>
-              1
-            </button>
-            <button onClick={() => this.handleVote('optionTwo')}>
-              2
-            </button>
-          </div>
-        }
-        {
-          answered &&
-          <div>
+      <Card style={{ marginTop: '20px', display: 'flex' }}>
+        <Paper style={{ padding: '20px', flex: '1', backgroundColor: '#b0bec5' }}>
+          <div>QuestionDetails</div>
+          <div>{`${answered}`}</div>
+          <div>{id}</div>
+          <div>{author.name}</div>
+        </Paper>
+        <CardContent style={{ flex: '2' }}>
+          <div>1 {optionOne.text}</div>
+          <div>2 {optionTwo.text}</div>
+          {
+            !answered &&
             <div>
-              Total Votes: {optionOne.votes.length + optionTwo.votes.length}
+              <button onClick={() => this.handleVote('optionOne')}>
+                1
+              </button>
+              <button onClick={() => this.handleVote('optionTwo')}>
+                2
+              </button>
             </div>
+          }
+          {
+            answered &&
             <div>
-              Votes for One: {optionOne.votes.length}
+              <div>
+                Total Votes: {optionOne.votes.length + optionTwo.votes.length}
+              </div>
+              <div>
+                Votes for One: {optionOne.votes.length}
+              </div>
+              <div>
+                Votes for Two: {optionTwo.votes.length}
+              </div>
             </div>
-            <div>
-              Votes for Two: {optionTwo.votes.length}
-            </div>
-          </div>
-        }
-      </div>
+          }
+        </CardContent>
+      </Card>
     );
   }
 }
