@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import Card, { CardActions, CardContent } from 'material-ui-next/Card';
 import Paper from 'material-ui-next/Paper';
 import Toolbar from 'material-ui-next/Toolbar';
+import Avatar from 'material-ui-next/Avatar';
 import moment from 'moment';
 
 class Question extends Component {
@@ -15,6 +16,7 @@ class Question extends Component {
       <Card>
         <Paper style={{ display: 'flex', backgroundColor: '#b0bec5', padding: '10px' }}>
           <div style={{ flex: 1 }}>
+            <Avatar src={author.avatarURL} />
             <div>{`${author.name} asks:`}</div>
             <div>{date}</div>
           </div>

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Card, { CardContent } from 'material-ui-next/Card';
 import Paper from 'material-ui-next/Paper';
+import Button from 'material-ui-next/Button';
 import { handleCastVote } from '../actions/shared';
 import NotFound from './NotFound';
 import Question from './Question';
@@ -34,17 +35,16 @@ class QuestionDetails extends Component {
           <div>{author.name}</div>
         </Paper>
         <CardContent style={{ flex: '2' }}>
-          <div>1 {optionOne.text}</div>
-          <div>2 {optionTwo.text}</div>
           {
             !answered &&
-            <div>
-              <button onClick={() => this.handleVote('optionOne')}>
-                1
-              </button>
-              <button onClick={() => this.handleVote('optionTwo')}>
-                2
-              </button>
+            <div style={{ display: 'flex', flexDirection: 'column' }}>
+              <p style={{ margin: 'auto', padding: '15px' }}>Would you rather...?</p>
+              <Button style={{ flex: '1', padding: '20px' }} onClick={() => this.handleVote('optionOne')}>
+                {optionOne.text}
+              </Button>
+              <Button style={{ flex: '1', padding: '20px' }} onClick={() => this.handleVote('optionTwo')}>
+                {optionTwo.text}
+              </Button>
             </div>
           }
           {

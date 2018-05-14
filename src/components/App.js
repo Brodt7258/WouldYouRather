@@ -22,21 +22,19 @@ class App extends Component {
       <Router>
         <Fragment>
           <LoadingBar />
-          <div>
-            <div style={{ maxWidth: '50rem', margin: 'auto' }}>
-              <Nav />
-              {this.props.loading === true
-                ? null
-                : <Switch>
-                    <Route path="/" exact component={Dashboard} />
-                    <Route path="/leaderboard" component={Leaderboard} />
-                    <Route path="login" component={Login} />
-                    <PrivateRoute path="/new" component={NewQuestion} />
-                    <PrivateRoute path="/question/:id" component={QuestionDetails} />
-                    <Route component={NotFound}/>
-                  </Switch>
-              }
-            </div>
+          <div style={{ maxWidth: '50rem', margin: 'auto' }}>
+            <Nav />
+            {this.props.loading === true
+              ? null
+              : <Switch>
+                  <Route path="/" exact component={Dashboard} />
+                  <Route path="/leaderboard" component={Leaderboard} />
+                  <Route path="login" component={Login} />
+                  <PrivateRoute path="/new" component={NewQuestion} />
+                  <PrivateRoute path="/question/:id" component={QuestionDetails} />
+                  <Route component={NotFound}/>
+                </Switch>
+            }
           </div>
         </Fragment>
       </Router>
