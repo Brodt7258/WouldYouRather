@@ -2,6 +2,7 @@ import { getInitialData } from '../utils/api';
 import { receiveUsers } from './users';
 import { receiveQuestions } from './questions';
 import { setAuthedUser } from './authedUser';
+import { setLoaded } from './loading';
 import { showLoading, hideLoading } from 'react-redux-loading';
 import { saveVote } from '../utils/api';
 
@@ -16,6 +17,7 @@ export const handleInitialData = () => (dispatch) => {
       dispatch(receiveUsers(users));
       dispatch(receiveQuestions(questions));
       dispatch(setAuthedUser(AUTHED_ID));
+      dispatch(setLoaded());
       dispatch(hideLoading());
     });
 };

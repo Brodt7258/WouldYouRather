@@ -43,9 +43,9 @@ class App extends Component {
   }
 }
 
-const mapStateToProps = ({ authedUser }) => {
+const mapStateToProps = ({ authedUser, isLoading }) => {
   return {
-    loading: authedUser === null
+    loading: isLoading
   };
 };
 

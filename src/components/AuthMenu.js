@@ -12,6 +12,7 @@ class AuthMenu extends Component {
   
   render() {
     const { authedUser, users, loading } = this.props;
+    console.log('AuthMenu', loading);
 
     return (
       <div>
@@ -35,14 +36,14 @@ class AuthMenu extends Component {
   }
 }
 
-const mapStateToProps = ({ users, authedUser }) => {
+const mapStateToProps = ({ users, authedUser, loadingBar }) => {
   return {
     authedUser,
     users: users
       ? Object.values(users)
         .map(({ id, name }) => ({ id, name }))
       : [],
-    loading: authedUser === null
+    loading: loadingBar.default === 1
   };
 };
 
