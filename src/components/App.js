@@ -18,18 +18,20 @@ class App extends Component {
   }
 
   render() {
+    const { isLoading } = this.props;
     return (
       <Router>
         <Fragment>
           <LoadingBar />
           <div style={{ maxWidth: '50rem', margin: 'auto' }}>
             <Nav />
-            {this.props.loading === true
+            {
+              isLoading
               ? null
               : <Switch>
                   <Route path="/" exact component={Dashboard} />
                   <Route path="/leaderboard" component={Leaderboard} />
-                  <Route path="login" component={Login} />
+                  <Route path="/login" component={Login} />
                   <PrivateRoute path="/new" component={NewQuestion} />
                   <PrivateRoute path="/question/:id" component={QuestionDetails} />
                   <Route component={NotFound}/>
@@ -43,9 +45,9 @@ class App extends Component {
   }
 }
 
-const mapStateToProps = ({ authedUser, isLoading }) => {
+const mapStateToProps = ({ isLoading }) => {
   return {
-    loading: isLoading
+    isLoading
   };
 };
 

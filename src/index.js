@@ -14,9 +14,11 @@ const store = createStore(reducer, middleware);
 const theme = createMuiTheme({
   palette: {
     primary: {
-      main: '#b0bec5',
+      main: '#b0bec5'
     },
-    secondary: pink
+    secondary: {
+      main: '#e2378B'
+    }
   },
 });
 

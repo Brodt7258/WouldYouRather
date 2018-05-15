@@ -10,19 +10,13 @@ import AuthMenu from './AuthMenu';
 
 
 class Nav extends Component {
-  styles = {
-    avatar: {
-      margin: 10,
-    },
-  }
   
   render() {
-    const { user } = this.props;
 
     return (
       <AppBar position="static" >
         <Toolbar>
-          <Avatar src={logo} alt="Would you Rather..?" component={Link} to="/" style={{marginRight: 15}} />
+          <Avatar src={logo} alt="Would you Rather..?" component={Link} to="/" style={{ marginRight: 15 }} />
           <div style={{ flex: 1 }}>
             <Button component={Link} to="/">
               Home
@@ -39,44 +33,13 @@ class Nav extends Component {
       </AppBar>
       
     );
-    // return (
-    //   <nav className="navbar">
-    //     <div className="navbar-brand">
-    //       <Link to="/" exact className="navbar-item">
-    //         <img src={logo} alt="Would you Rather..?"/>
-    //       </Link>
-    //     </div>
-    //     <div className="navbar-menu">
-    //       <div className="navbar-start">
-    //         <Link to="/" exact className="navbar-item">
-    //           Home
-    //         </Link>
-    //         <Link to="/leaderboard" className="navbar-item">
-    //           Leaderboard
-    //         </Link>
-    //         <Link to="/new" className="navbar-item">
-    //           Ask
-    //         </Link>
-    //       </div>
-    //       <div className="navbar-end">
-    //         <div className="navbar-item">
-    //           {
-    //             user
-    //               ? user.name
-    //               : "Sign In"
-    //           }
-    //         </div>
-    //       </div>
-    //     </div>
-    //   </nav>
-    // );
   }
 }
 
-const mapStateToProps = ({ users, authedUser }) => {
-  return {
-    user: users[authedUser]
-  };
-};
+// const mapStateToProps = ({ users, authedUser }) => {
+//   return {
+//     user: users[authedUser]
+//   };
+// };
 
-export default connect(mapStateToProps)(Nav);
+export default connect()(Nav);

@@ -6,7 +6,6 @@ import Button from 'material-ui-next/Button';
 import moment from 'moment';
 import { handleCastVote } from '../actions/shared';
 import NotFound from './NotFound';
-import Question from './Question';
 import UserAvatar from './UserAvatar';
 
 class QuestionDetails extends Component {
@@ -20,7 +19,7 @@ class QuestionDetails extends Component {
   };
 
   render() {
-    const { answered = false, id, question: { optionOne, optionTwo, timestamp } = {}, author = '', notFound } = this.props;
+    const { answered = false, question: { optionOne, optionTwo, timestamp } = {}, author = '', notFound } = this.props;
     
 
     if (notFound) {
@@ -35,7 +34,7 @@ class QuestionDetails extends Component {
       <Card style={{ marginTop: '20px', display: 'flex' }}>
         <Paper style={{ padding: '20px', flex: '1', backgroundColor: '#b0bec5' }}>
           <div style={{ margin: 'auto', textAlign: 'center' }}>
-            <UserAvatar uID={author.id} style={{ margin: 'auto' }} />
+            <UserAvatar uID={author.id} style={{ margin: 'auto', marginBottom: 10 }} />
             <div >{author.name}</div>
             <div>{date}</div>
           </div>
@@ -76,7 +75,6 @@ class QuestionDetails extends Component {
 
 const mapStateToProps = ({questions, users, authedUser}, props) => {
   const { id } = props.match.params;
-  console.log(!!questions[id]);
 
   if (questions[id]) {
     return {
