@@ -35,21 +35,6 @@ class Dashboard extends Component {
       
       
     );
-
-    // return (
-    //   <div>
-    //     <div className="tabs is-centered">
-    //       <ul>
-    //         <li className={show === 'new' ? 'is-active' : ''}><a onClick={this.toggleQuestions}>New</a></li>
-    //         <li className={show === 'answered' ? 'is-active' : ''}><a onClick={this.toggleQuestions}>Answered</a></li>
-    //       </ul>
-    //     </div>
-
-    //     {/*This feels badly optimized, but it's what I've got for now*/}
-    //     {show === 'new' && <QuestionList type="new" />}
-    //     {show === 'answered' && <QuestionList type="answered" />}
-    //   </div>
-    //);
   }
 }
 

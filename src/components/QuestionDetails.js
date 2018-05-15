@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import Card, { CardContent } from 'material-ui-next/Card';
 import Paper from 'material-ui-next/Paper';
 import Button from 'material-ui-next/Button';
+import moment from 'moment';
 import { handleCastVote } from '../actions/shared';
 import NotFound from './NotFound';
 import Question from './Question';
@@ -19,7 +20,8 @@ class QuestionDetails extends Component {
   };
 
   render() {
-    const { answered = false, id, question: { optionOne, optionTwo } = {}, author = '', notFound } = this.props;
+    const { answered = false, id, question: { optionOne, optionTwo, timestamp } = {}, author = '', notFound } = this.props;
+    
 
     if (notFound) {
       return (
@@ -27,13 +29,17 @@ class QuestionDetails extends Component {
       );
     }
 
+    const date = moment(timestamp).format('MMM Do, YYYY | h:mm a');
+
     return (
       <Card style={{ marginTop: '20px', display: 'flex' }}>
         <Paper style={{ padding: '20px', flex: '1', backgroundColor: '#b0bec5' }}>
-          <div>QuestionDetails</div>
-          <div>{`${answered}`}</div>
-          <div>{id}</div>
-          <div>{author.name}</div>
+          <div style={{ margin: 'auto', textAlign: 'center' }}>
+            <UserAvatar uID={author.id} style={{ margin: 'auto' }} />
+            <div >{author.name}</div>
+            <div>{date}</div>
+          </div>
+          
         </Paper>
         <CardContent style={{ flex: '2' }}>
           {
