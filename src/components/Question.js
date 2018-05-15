@@ -1,16 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
-import Card, { CardActions, CardContent } from 'material-ui-next/Card';
+import Card, { CardContent } from 'material-ui-next/Card';
 import Paper from 'material-ui-next/Paper';
-import Toolbar from 'material-ui-next/Toolbar';
-import Avatar from 'material-ui-next/Avatar';
 import moment from 'moment';
 import UserAvatar from './UserAvatar';
 
 class Question extends Component {
   render() {
-    const { id, question: {optionOne, optionTwo, timestamp }, author } = this.props;
+    const { question: {optionOne, optionTwo, timestamp }, author } = this.props;
     const date = moment(timestamp).format('MMM Do, YYYY | h:mm a');
 
     return (

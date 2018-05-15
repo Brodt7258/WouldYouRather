@@ -6,6 +6,7 @@ import Button from 'material-ui-next/Button';
 import { handleCastVote } from '../actions/shared';
 import NotFound from './NotFound';
 import Question from './Question';
+import UserAvatar from './UserAvatar';
 
 class QuestionDetails extends Component {
   handleVote = answer => {
