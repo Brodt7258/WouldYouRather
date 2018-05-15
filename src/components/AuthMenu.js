@@ -26,7 +26,7 @@ class AuthMenu extends Component {
   }
   
   render() {
-    const { users, isLoading, currentUser } = this.props;
+    const { users, isLoading, currentUser, authedUser } = this.props;
     const { anchorEl } = this.state;
     
     return (
@@ -34,9 +34,9 @@ class AuthMenu extends Component {
         ? null
         : (<div>
           <div style={{ display: 'flex' }} onClick={this.handleClick}>
-            <UserAvatar uID={currentUser.id} />
+            {authedUser && <UserAvatar uID={currentUser.id} />}
             <Button >
-              {currentUser ? currentUser.name : 'Login'}
+              {authedUser ? currentUser.name : 'Login'}
             </Button>
             
           </div>
@@ -45,15 +45,16 @@ class AuthMenu extends Component {
               anchorEl={anchorEl}
               open={Boolean(anchorEl)}
               onClose={this.handleClose}
-              anchorPosition={{ top: 1000, left: 300 }}
             >
-              <MenuItem
+              { authedUser &&
+                <MenuItem
                 onClick={() => this.handleSetUser(currentUser.id)}
                 style={{ display: 'flex' }}
               >
                 <div style={{ flex: 1 }}><UserAvatar uID={currentUser.id} style={{ marginRight: 10 }} /></div>
                 <div style={{ flex: 2 }}>{currentUser.name}</div>
               </MenuItem>
+              }
               {users.filter(u => u.id !== currentUser.id)
                 .map(u => (
                 <MenuItem 
@@ -84,6 +85,7 @@ class AuthMenu extends Component {
 
 const mapStateToProps = ({ users, authedUser, isLoading }) => {
   return {
+    authedUser,
     currentUser: authedUser ? Object.values(users).filter(u => u.id === authedUser)[0] : {},
     users: users
       ? Object.values(users)
