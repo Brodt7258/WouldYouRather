@@ -38,7 +38,7 @@ class QuestionDetails extends Component {
           {
             !answered &&
             <div style={{ display: 'flex', flexDirection: 'column' }}>
-              <p style={{ margin: 'auto', padding: '15px' }}>Would you rather...?</p>
+              <p style={{ margin: 'auto', padding: '15px' }}>Would you Rather?</p>
               <Button style={{ flex: '1', padding: '20px' }} onClick={() => this.handleVote('optionOne')}>
                 {optionOne.text}
               </Button>

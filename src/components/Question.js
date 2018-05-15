@@ -6,6 +6,7 @@ import Paper from 'material-ui-next/Paper';
 import Toolbar from 'material-ui-next/Toolbar';
 import Avatar from 'material-ui-next/Avatar';
 import moment from 'moment';
+import UserAvatar from './UserAvatar';
 
 class Question extends Component {
   render() {
@@ -15,10 +16,12 @@ class Question extends Component {
     return (
       <Card>
         <Paper style={{ display: 'flex', backgroundColor: '#b0bec5', padding: '10px' }}>
-          <div style={{ flex: 1 }}>
-            <Avatar src={author.avatarURL} />
-            <div>{`${author.name} asks:`}</div>
-            <div>{date}</div>
+          <div style={{ display: 'flex', flex: 1 }}>
+            <UserAvatar uID={author.id} />
+            <div style={{ flex: '1', paddingLeft: '15px' }}>
+              <div>{author.name}</div>
+              <div>{date}</div>
+            </div>
           </div>
           <div style={{ flex: 1, textAlign: 'right' }}>
             <div>Likes</div>
