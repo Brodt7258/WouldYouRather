@@ -1,18 +1,27 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
+import TextField from 'material-ui-next/TextField';
+import Card, { CardContent } from 'material-ui-next/Card';
+import Button from 'material-ui-next/Button';
+import InputAdornment from 'material-ui-next/Input/InputAdornment';
 import { handleAddQuestion } from '../actions/questions';
 
 class NewQuestion extends Component {
   state = {
     optionOne: '',
     optionTwo: '',
-    newQID: ''
+    newQID: '',
+    cancel: false
   };
 
+  OPTION_MAX = 60;
+
   handleChange = key => e => {
-    this.setState({ [key]: e.target.value });
-  }
+    if (e.target.value.length <= this.OPTION_MAX) {
+      this.setState({ [key]: e.target.value });
+    }
+  };
 
   handleSubmit = (e) => {
     e.preventDefault();
@@ -28,52 +37,83 @@ class NewQuestion extends Component {
   }
   
   render() {
-    const { optionOne, optionTwo, newQID } = this.state;
+    const { optionOne, optionTwo, newQID, cancel } = this.state;
+
+    if(cancel) {
+      return <Redirect to={'/'} />;
+    }
 
     if (newQID) {
       return <Redirect to={`/question/${newQID}`} />;
     }
 
-    const oneLeft = 280 - optionOne.length;
-    const twoLeft = 280 - optionTwo.length;
+    const WARN_SIZE = 30;
+
+    const oneLeft = this.OPTION_MAX - optionOne.length;
+    const twoLeft = this.OPTION_MAX - optionTwo.length;
 
     return (
-      <div>
-        <div>NewQuestion</div>
-        <form className="" onSubmit={this.handleSubmit}>
-          <textarea
-            placeholder="First Option"
-            value={optionOne}
-            onChange={this.handleChange('optionOne')}
-            className=""
-            maxLength={280}
-          />
-          {oneLeft <= 100 && (
-            <div className="">
-              {oneLeft}
+      <Card style={{ marginTop: '20px', display: 'flex' }}>
+        <CardContent style={{ flex: 1 }}>
+
+          <p style={{ textAlign: 'center' }}>
+            Would you Rather?
+          </p>
+
+          <form onSubmit={this.handleSubmit}>
+            <div style={{ display: 'flex' }}>
+
+              <div style={{ flex: 1, textAlign: 'center', margin: '10px' }}>
+              <TextField
+                placeholder="First Option"
+                value={optionOne}
+                onChange={this.handleChange('optionOne')}
+                multiline
+                fullWidth
+                required
+                rows={2}
+                InputProps={{
+                  endAdornment: <InputAdornment position="end">{oneLeft <= WARN_SIZE ? oneLeft : ''}</InputAdornment>,
+                }}
+              />
+              </div>
+
+              <div style={{ flex: 1, textAlign: 'center', margin: '10px' }}>
+                <TextField
+                  placeholder="Second Option"
+                  value={optionTwo}
+                  onChange={this.handleChange('optionTwo')}
+                  multiline
+                  fullWidth
+                  required
+                  rows={2}
+                  InputProps={{
+                    endAdornment: <InputAdornment position="end">{twoLeft <= WARN_SIZE ? twoLeft : ''}</InputAdornment>,
+                  }}
+                />
+              </div>
             </div>
-          )}
-          <textarea
-            placeholder="Second Option"
-            value={optionTwo}
-            onChange={this.handleChange('optionTwo')}
-            className=""
-            maxLength={280}
-          />
-          {twoLeft <= 100 && (
-            <div className="">
-              {twoLeft}
+
+            <div style={{ display: 'flex' }}>
+              <Button
+                style={{ marginTop: '10px' }}
+                onClick={() => this.setState({ cancel: true })}
+              >
+                Cancel
+              </Button>
+
+              <div style={{ flex: '1' }}></div>
+              <Button
+                style={{ marginTop: '10px' }}
+                type="submit"
+                disabled={optionOne === '' || optionTwo === ''}
+              >
+                Submit
+              </Button>
             </div>
-          )}
-          <button
-            className=""
-            type="submit"
-            disabled={optionOne === '' || optionTwo === ''}
-          >
-            Submit
-          </button>
-        </form>
-      </div>
+          </form>
+        </CardContent>
+      </Card>
       
     );
   }
