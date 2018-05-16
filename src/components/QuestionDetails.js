@@ -7,6 +7,7 @@ import moment from 'moment';
 import { handleCastVote } from '../actions/shared';
 import NotFound from './NotFound';
 import UserAvatar from './UserAvatar';
+import VoteChart from './VoteChart';
 
 class QuestionDetails extends Component {
   handleVote = answer => {
@@ -55,16 +56,21 @@ class QuestionDetails extends Component {
           }
           {
             answered &&
-            <div>
-              <div>
+            <div style={{ display: 'flex', flexDirection: 'column' }}>
+              <p style={{ margin: 'auto', padding: '15px' }}>
                 Total Votes: {optionOne.votes.length + optionTwo.votes.length}
-              </div>
-              <div>
+              </p>
+              <Paper style={{ flex: '1', padding: '20px' }}>
                 Votes for One: {optionOne.votes.length}
-              </div>
-              <div>
+              </Paper>
+              <Paper style={{ flex: '1', padding: '20px' }}>
                 Votes for Two: {optionTwo.votes.length}
-              </div>
+              </Paper>
+              <VoteChart
+                style={{ flex: 1 }}
+                optOneVotes={optionOne.votes.length}
+                optTwoVotes={optionTwo.votes.length}
+              />
             </div>
           }
         </CardContent>
