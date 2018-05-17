@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import Tabs, { Tab } from 'material-ui-next/Tabs';
 import Paper from 'material-ui-next/Paper';
 import QuestionList from './QuestionList';
@@ -15,6 +16,7 @@ class Dashboard extends Component {
   };
 
   render() {
+    const { authedUser } = this.props;
     const { value } = this.state;
 
     return (
@@ -26,7 +28,7 @@ class Dashboard extends Component {
             centered
           >
             <Tab label="New" value="a" />
-            <Tab label="Answered" value="b" />
+            <Tab label="Answered" value="b" disabled={!authedUser} />
           </Tabs>
         </Paper>
         {value === 'a' && <QuestionList type="new" />}
@@ -38,4 +40,10 @@ class Dashboard extends Component {
   }
 }
 
-export default Dashboard;
+const mapStateToProps = ({ authedUser }) => {
+  return {
+    authedUser
+  };
+};
+
+export default connect(mapStateToProps)(Dashboard);

@@ -8,15 +8,13 @@ import { saveVote } from '../utils/api';
 
 export const CAST_VOTE = 'CAST_VOTE';
 
-const AUTHED_ID = 'tylermcginnis';
-
 export const handleInitialData = () => (dispatch) => {
   dispatch(showLoading());
   return getInitialData()
     .then(({ users, questions }) => {
       dispatch(receiveUsers(users));
       dispatch(receiveQuestions(questions));
-      dispatch(setAuthedUser(AUTHED_ID));
+      dispatch(setAuthedUser(null));
       dispatch(setLoaded());
       dispatch(hideLoading());
     });
