@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import Card, { CardContent } from 'material-ui-next/Card';
+import Table, { TableBody, TableCell, TableHead, TableRow } from 'material-ui-next/Table';
+import Paper from 'material-ui-next/Paper';
+import UserAvatar from './UserAvatar';
 
 class Leaderboard extends Component {
   render() {
@@ -7,15 +11,38 @@ class Leaderboard extends Component {
 
     return (
       <div>
-        <div>Leaderboard</div>
-        <br/>
-        {
-          users.map(u => (
-            <div key={u.id}>
-              {`${u.name}  |  ${u.score}`}
-            </div>
-          ))
-        }
+        <p style={{ textAlign: 'center' }}>Leaderboard</p>
+        <Paper>
+          <Table>
+            <TableHead>
+              <TableRow>
+                <TableCell>rank</TableCell>
+                <TableCell padding="none"></TableCell>
+                <TableCell>name</TableCell>
+                <TableCell numeric>asked</TableCell>
+                <TableCell numeric>answered</TableCell>
+                <TableCell numeric>score</TableCell>
+              </TableRow>
+            </TableHead>
+
+            <TableBody>
+              {
+                users.map((u, i) => (
+                  <TableRow key={u.id} hover>
+                    <TableCell>{i+1}</TableCell>
+                    <TableCell padding="none">
+                      <UserAvatar uID={u.id} />
+                    </TableCell>
+                    <TableCell>{u.name}</TableCell>
+                    <TableCell numeric>{u.asked}</TableCell>
+                    <TableCell numeric>{u.answered}</TableCell>
+                    <TableCell numeric>{u.asked + u.answered}</TableCell>
+                  </TableRow>
+                ))
+              }
+            </TableBody>
+          </Table>
+        </Paper>
       </div>
     );
   }
@@ -25,8 +52,13 @@ const mapStateToProps = ({ users }) => {
   return {
     users: users 
     ? Object.values(users)
-      .map(({ id, name, answers, questions }) => ({ id, name, score: questions.length + Object.keys(answers).length  }))
-      .sort((a, b) => b.score - a.score)
+      .map(({ id, name, answers, questions }) => ({
+        id,
+        name,
+        asked: questions.length,
+        answered: Object.keys(answers).length,
+      }))
+      .sort((a, b) => (b.asked + b.answered) - (a.asked + a.answered))
     : []
   }
 };
