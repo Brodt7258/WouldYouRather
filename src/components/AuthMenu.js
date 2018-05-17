@@ -38,9 +38,9 @@ class AuthMenu extends Component {
                   key={u.id}
                   onClick={() => {
                     this.handleSetUser(u.id);
-                    handleLoggedIn
-                    ? handleLoggedIn()
-                    : null
+                    if (handleLoggedIn) {
+                      handleLoggedIn()
+                    }
                   }}
                   style={{ display: 'flex' }}
                 >
