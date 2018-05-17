@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { setAuthedUser } from '../actions/authedUser';
 import { MenuItem } from 'material-ui-next/Menu';
+import { ListItem, ListItemIcon, ListItemText } from 'material-ui-next/List';
 import UserAvatar from './UserAvatar';
 
 class AuthMenu extends Component {
@@ -29,11 +30,13 @@ class AuthMenu extends Component {
                   <MenuItem
                     onClick={this.handleClick}
                     style={{ display: 'flex' }}
-                  >
+                  >  
                     <div style={{ display: 'flex', justifyContent: 'flex-end', flex: 1 }}>
-                      <UserAvatar uID={currentUser.id} style={{ marginRight: 10 }} />
+                      <UserAvatar uID={currentUser.id} />
                     </div>
-                    <div style={{ flex: 2 }}>{currentUser.name}</div>
+                    <ListItemText inset style={{ flex: 2 }}>
+                      {currentUser.name}
+                    </ListItemText>
                   </MenuItem>
                   <hr />
                 </div>  
@@ -50,9 +53,11 @@ class AuthMenu extends Component {
                   style={{ display: 'flex' }}
                 >
                   <div style={{ display: 'flex', justifyContent: 'flex-end', flex: 1 }}>
-                    <UserAvatar uID={u.id} style={{ marginRight: 10 }} />
+                    <UserAvatar uID={u.id} />
                   </div>
-                  <div style={{ flex: 2 }}>{u.name}</div>
+                  <ListItemText inset style={{ flex: 2 }}>
+                    {u.name}
+                  </ListItemText>
                 </MenuItem>))}
               
               { currentUser &&
@@ -66,7 +71,9 @@ class AuthMenu extends Component {
                   style={{ display: 'flex' }}
                 >
                   <div style={{ flex: 1 }}></div>
-                  <div style={{ flex: 2 }}>Logout</div>
+                  <ListItemText inset style={{ flex: 2 }}>
+                    Logout
+                  </ListItemText>
                 </MenuItem>
                 </div>
               }
