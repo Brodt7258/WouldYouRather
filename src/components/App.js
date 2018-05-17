@@ -11,6 +11,7 @@ import QuestionDetails from './QuestionDetails';
 import NotFound from './NotFound';
 import PrivateRoute from './PrivateRoute';
 import Login from './Login';
+import CreateUser from './CreateUser';
 
 class App extends Component {
   componentDidMount() {
@@ -32,6 +33,7 @@ class App extends Component {
                   <Route path="/" exact component={Dashboard} />
                   <Route path="/leaderboard" component={Leaderboard} />
                   <Route path="/login" component={Login} />
+                  <Route path="/create" component={CreateUser} />
                   <PrivateRoute path="/new" component={NewQuestion} />
                   <PrivateRoute path="/question/:id" component={QuestionDetails} />
                   <Route component={NotFound}/>
