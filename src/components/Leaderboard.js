@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import Card, { CardContent } from 'material-ui-next/Card';
 import Table, { TableBody, TableCell, TableHead, TableRow } from 'material-ui-next/Table';
 import Paper from 'material-ui-next/Paper';
 import UserAvatar from './UserAvatar';
@@ -14,7 +13,7 @@ class Leaderboard extends Component {
         <p style={{ textAlign: 'center' }}>Leaderboard</p>
         <Paper>
           <Table>
-            <TableHead>
+            <TableHead style={{ backgroundColor: '#b0bec5' }}>
               <TableRow>
                 <TableCell>rank</TableCell>
                 <TableCell padding="none"></TableCell>

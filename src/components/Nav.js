@@ -6,7 +6,7 @@ import Button from 'material-ui-next/Button';
 import Avatar from 'material-ui-next/Avatar';
 import AppBar from 'material-ui-next/AppBar';
 import logo from '../images/icon-01.png';
-import AuthMenu from './AuthMenu';
+import NavAuth from './NavAuth';
 
 
 class Nav extends Component {
@@ -28,7 +28,7 @@ class Nav extends Component {
               Ask
             </Button>
           </div>
-          <AuthMenu />
+          <NavAuth />
         </Toolbar>
       </AppBar>
       

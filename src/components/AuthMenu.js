@@ -1,68 +1,52 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { setAuthedUser } from '../actions/authedUser';
-import Button from 'material-ui-next/Button';
-import Menu, { MenuItem } from 'material-ui-next/Menu';
+import { MenuItem } from 'material-ui-next/Menu';
 import UserAvatar from './UserAvatar';
 
 class AuthMenu extends Component {
-  state = {
-    anchorEl: null,
-  };
-
-  handleClick = event => {
-    this.setState({ anchorEl: event.currentTarget });
-  };
-
-  handleClose = () => {
-    this.setState({ anchorEl: null });
-  };
-
   handleSetUser = id => {
     const { dispatch } = this.props;
 
     dispatch(setAuthedUser(id));
     this.setState({ anchorEl: null });
   }
-  
+
   render() {
-    const { users, isLoading, currentUser, authedUser } = this.props;
-    const { anchorEl } = this.state;
+    const { users, currentUser, authedUser, handleLoggedIn = null } = this.props;
     
     return (
-        isLoading
-        ? null
-        : (<div>
-          <div style={{ display: 'flex' }} onClick={this.handleClick}>
-            {authedUser && <UserAvatar uID={currentUser.id} />}
-            <Button >
-              {authedUser ? currentUser.name : 'Login'}
-            </Button>
-            
-          </div>
-          <Menu
-              id="simple-menu"
-              anchorEl={anchorEl}
-              open={Boolean(anchorEl)}
-              onClose={this.handleClose}
-            >
+            <div>
               { authedUser &&
-                <MenuItem
-                onClick={() => this.handleSetUser(currentUser.id)}
-                style={{ display: 'flex' }}
-              >
-                <div style={{ flex: 1 }}><UserAvatar uID={currentUser.id} style={{ marginRight: 10 }} /></div>
-                <div style={{ flex: 2 }}>{currentUser.name}</div>
-              </MenuItem>
+                <div>
+                  <MenuItem
+                    onClick={handleLoggedIn}
+                    style={{ display: 'flex' }}
+                  >
+                    <div style={{ display: 'flex', justifyContent: 'flex-end', flex: 1 }}>
+                      <UserAvatar uID={currentUser.id} style={{ marginRight: 10 }} />
+                    </div>
+                    <div style={{ flex: 2 }}>{currentUser.name}</div>
+                  </MenuItem>
+                  <hr />
+                </div>  
               }
-              {users.filter(u => u.id !== currentUser.id)
+              { 
+                users.filter(u => currentUser ? u.id !== currentUser.id : true)
                 .map(u => (
                 <MenuItem 
                   key={u.id}
-                  onClick={() => this.handleSetUser(u.id)}
+                  onClick={() => {
+                    this.handleSetUser(u.id);
+                    handleLoggedIn
+                    ? handleLoggedIn()
+                    : null
+                  }}
                   style={{ display: 'flex' }}
                 >
-                  <div style={{ flex: 1 }}><UserAvatar uID={u.id} style={{ marginRight: 10 }} /></div>
+                  <div style={{ display: 'flex', justifyContent: 'flex-end', flex: 1 }}>
+                    <UserAvatar uID={u.id} style={{ marginRight: 10 }} />
+                  </div>
                   <div style={{ flex: 2 }}>{u.name}</div>
                 </MenuItem>))}
               
@@ -75,23 +59,20 @@ class AuthMenu extends Component {
                 </MenuItem>
                 </div>
               }
-            </Menu>
-          </div>
-        )
-        
+          </div>  
     );
   }
 }
 
-const mapStateToProps = ({ users, authedUser, isLoading }) => {
+const mapStateToProps = ({ users, authedUser }, props) => {
   return {
     authedUser,
-    currentUser: authedUser ? Object.values(users).filter(u => u.id === authedUser)[0] : {},
+    currentUser: authedUser ? Object.values(users).filter(u => u.id === authedUser)[0] : null,
     users: users
       ? Object.values(users)
         .map(({ id, name }) => ({ id, name }))
       : [],
-    isLoading
+    ...props
   };
 };
 
