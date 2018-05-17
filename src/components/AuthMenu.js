@@ -12,15 +12,22 @@ class AuthMenu extends Component {
     this.setState({ anchorEl: null });
   }
 
+  handleClick = () => {
+    const { handleLoggedIn = null } = this.props;
+    if (handleLoggedIn) {
+      handleLoggedIn();
+    }
+  }
+
   render() {
-    const { users, currentUser, authedUser, handleLoggedIn = null } = this.props;
+    const { users, currentUser, authedUser } = this.props;
     
     return (
             <div>
               { authedUser &&
                 <div>
                   <MenuItem
-                    onClick={handleLoggedIn}
+                    onClick={this.handleClick}
                     style={{ display: 'flex' }}
                   >
                     <div style={{ display: 'flex', justifyContent: 'flex-end', flex: 1 }}>
@@ -38,9 +45,7 @@ class AuthMenu extends Component {
                   key={u.id}
                   onClick={() => {
                     this.handleSetUser(u.id);
-                    if (handleLoggedIn) {
-                      handleLoggedIn()
-                    }
+                    this.handleClick();
                   }}
                   style={{ display: 'flex' }}
                 >
@@ -53,7 +58,13 @@ class AuthMenu extends Component {
               { currentUser &&
                 <div>
                 <hr />
-                <MenuItem onClick={() => this.handleSetUser(null)} style={{ display: 'flex' }}>
+                <MenuItem
+                  onClick={() => {
+                    this.handleSetUser(null);
+                    this.handleClick();
+                  }}
+                  style={{ display: 'flex' }}
+                >
                   <div style={{ flex: 1 }}></div>
                   <div style={{ flex: 2 }}>Logout</div>
                 </MenuItem>
