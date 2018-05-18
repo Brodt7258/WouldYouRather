@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import { setAuthedUser } from '../actions/authedUser';
 import { MenuItem } from 'material-ui-next/Menu';
 import { ListItem, ListItemIcon, ListItemText } from 'material-ui-next/List';
@@ -21,7 +22,7 @@ class AuthMenu extends Component {
   }
 
   render() {
-    const { users, currentUser, authedUser } = this.props;
+    const { users, currentUser, authedUser, history } = this.props;
     
     return (
             <div>
@@ -41,6 +42,7 @@ class AuthMenu extends Component {
                   <hr />
                 </div>  
               }
+
               { 
                 users.filter(u => currentUser ? u.id !== currentUser.id : true)
                 .map(u => (
@@ -59,22 +61,37 @@ class AuthMenu extends Component {
                     {u.name}
                   </ListItemText>
                 </MenuItem>))}
-              
-              { currentUser &&
-                <div>
-                <hr />
+
+                {
+                  users &&
+                  <hr />
+                }
+
                 <MenuItem
-                  onClick={() => {
-                    this.handleSetUser(null);
-                    this.handleClick();
-                  }}
+                  onClick={() => history.push('/create')}
                   style={{ display: 'flex' }}
                 >
                   <div style={{ flex: 1 }}></div>
                   <ListItemText inset style={{ flex: 2 }}>
-                    Logout
+                    Sign up
                   </ListItemText>
                 </MenuItem>
+
+              { currentUser &&
+                <div>
+                  <hr />
+                  <MenuItem
+                    onClick={() => {
+                      this.handleSetUser(null);
+                      this.handleClick();
+                    }}
+                    style={{ display: 'flex' }}
+                  >
+                    <div style={{ flex: 1 }}></div>
+                    <ListItemText inset style={{ flex: 2 }}>
+                      Logout
+                    </ListItemText>
+                  </MenuItem>
                 </div>
               }
           </div>  
@@ -94,4 +111,4 @@ const mapStateToProps = ({ users, authedUser }, props) => {
   };
 };
 
-export default connect(mapStateToProps)(AuthMenu);
+export default withRouter(connect(mapStateToProps)(AuthMenu));

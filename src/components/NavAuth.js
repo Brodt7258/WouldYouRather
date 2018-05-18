@@ -19,7 +19,7 @@ class NavAuth extends Component {
   };
   
   render() {
-    const { isLoading, currentUser, authedUser } = this.props;
+    const { isLoading, currentUser } = this.props;
     const { anchorEl } = this.state;
     
     return (
@@ -27,9 +27,9 @@ class NavAuth extends Component {
         ? null
         : (<div>
           <div style={{ display: 'flex' }} onClick={this.handleClick}>
-            {authedUser && <UserAvatar uID={currentUser.id} />}
+            {currentUser && <UserAvatar uID={currentUser.id} />}
             <Button >
-              {authedUser ? currentUser.name : 'Login'}
+              {currentUser ? currentUser.name : 'Login'}
             </Button>
             
           </div>
@@ -49,7 +49,6 @@ class NavAuth extends Component {
 
 const mapStateToProps = ({ users, authedUser, isLoading }) => {
   return {
-    authedUser,
     currentUser: authedUser ? Object.values(users).filter(u => u.id === authedUser)[0] : null,
     isLoading
   };
