@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 import Question from './Question';
 
 class QuestionList extends Component {
@@ -11,9 +10,7 @@ class QuestionList extends Component {
         {
           questions
             ? questions.map(q => (
-              <Link key={q} to={`/question/${q}`} style={{ margin: 20, textDecoration: 'none', color: 'black' }}>
-                <Question  id={q} />
-              </Link>
+                <Question key={q} id={q} />
             ))
             : <div>No questions yet</div>
         }

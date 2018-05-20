@@ -29,7 +29,10 @@ class AuthMenu extends Component {
               { authedUser &&
                 <div>
                   <MenuItem
-                    onClick={this.handleClick}
+                    onClick={() => {
+                      this.handleClick()
+                      history.push(`/user/${authedUser}`)
+                    }}
                     style={{ display: 'flex' }}
                   >  
                     <div style={{ display: 'flex', justifyContent: 'flex-end', flex: 1 }}>
@@ -73,7 +76,7 @@ class AuthMenu extends Component {
                 >
                   <div style={{ flex: 1 }}></div>
                   <ListItemText inset style={{ flex: 2 }}>
-                    Sign up
+                    Create New
                   </ListItemText>
                 </MenuItem>
 

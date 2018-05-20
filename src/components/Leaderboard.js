@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import Table, { TableBody, TableCell, TableHead, TableRow } from 'material-ui-next/Table';
 import Paper from 'material-ui-next/Paper';
 import UserAvatar from './UserAvatar';
 
 class Leaderboard extends Component {
   render() {
-    const { users } = this.props;
+    const { users, history } = this.props;
 
     return (
       <div>
@@ -27,7 +28,11 @@ class Leaderboard extends Component {
             <TableBody>
               {
                 users.map((u, i) => (
-                  <TableRow key={u.id} hover>
+                  <TableRow
+                    key={u.id}
+                    hover
+                    onClick={() => history.push(`/user/${u.id}`)}
+                  >
                     <TableCell>{i+1}</TableCell>
                     <TableCell padding="none">
                       <UserAvatar uID={u.id} />
@@ -62,4 +67,4 @@ const mapStateToProps = ({ users }) => {
   }
 };
 
-export default connect(mapStateToProps)(Leaderboard);
+export default withRouter(connect(mapStateToProps)(Leaderboard));
