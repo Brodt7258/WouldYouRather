@@ -32,7 +32,8 @@ class CommentForm extends Component {
       author: authedUser,
       text,
       timeStamp
-     }))
+     }));
+     this.setState({ text: '' });
   }
   
   render() {

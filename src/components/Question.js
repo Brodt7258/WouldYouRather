@@ -4,11 +4,12 @@ import { Link } from 'react-router-dom';
 import Card, { CardContent } from 'material-ui-next/Card';
 import Paper from 'material-ui-next/Paper';
 import moment from 'moment';
+import Replies from 'react-icons/lib/md/reply';
 import UserAvatar from './UserAvatar';
 
 class Question extends Component {
   render() {
-    const { question: { id, optionOne, optionTwo, timestamp }, author } = this.props;
+    const { question: { id, optionOne, optionTwo, timestamp }, author, comments } = this.props;
     const date = moment(timestamp).format('MMM Do, YYYY | h:mm a');
 
     return (
@@ -24,7 +25,12 @@ class Question extends Component {
             </div>
             <div style={{ flex: 1, textAlign: 'right' }}>
               <div>Likes</div>
-              <div>Comments</div>
+              <div>
+                {
+                  comments &&
+                  <div><Replies /> {comments}</div>
+                }
+              </div>
             </div>
           </Paper>
           <CardContent>
@@ -53,9 +59,13 @@ class Question extends Component {
 }
 
 const mapStateToProps = ({ questions, users }, { id }) => {
+  const question = questions[id];
   return {
-    question: questions[id],
-    author: users[questions[id].author]
+    question,
+    author: users[question.author],
+    comments: question.comments
+      ? Object.values(question.comments).length
+      : false
   };
 };
 
