@@ -1,14 +1,15 @@
-import { RECEIVE_QUESTIONS, ADD_QUESTION } from '../actions/questions';
+import { RECEIVE_QUESTIONS, ADD_QUESTION, ADD_COMMENT } from '../actions/questions';
 import { CAST_VOTE } from '../actions/shared';
 
 export default (state = {}, action) => {
   switch (action.type) {
-    case RECEIVE_QUESTIONS:
+    case RECEIVE_QUESTIONS: {
       return { 
         ...state,
         ...action.questions 
       };
-    case ADD_QUESTION:
+    }
+    case ADD_QUESTION: {
       const { question } = action;
       return {
         ...state,
@@ -16,7 +17,8 @@ export default (state = {}, action) => {
           ...question
         }
       };
-    case CAST_VOTE:
+    }
+    case CAST_VOTE: {
       const { authedUser, qid, answer } = action;
       return {
         ...state,
@@ -28,6 +30,22 @@ export default (state = {}, action) => {
           }
         }
       };
+    }
+    case ADD_COMMENT: {
+      const { qid, comment } = action;
+      return {
+        ...state,
+        [qid]: {
+          ...state[qid],
+          comments: {
+            ...state[qid].comments,
+            [comment.id] : {
+              ...comment
+            }
+          }
+        }
+      };
+    }
     default:
       return state;
   }

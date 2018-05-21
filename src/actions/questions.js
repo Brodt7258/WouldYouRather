@@ -3,6 +3,7 @@ import { showLoading, hideLoading } from 'react-redux-loading';
 
 export const RECEIVE_QUESTIONS = 'RECEIVE_QUESTIONS';
 export const ADD_QUESTION = 'ADD_QUESTION';
+export const ADD_COMMENT = 'ADD_COMMENT';
 
 
 export const receiveQuestions = (questions) => {
@@ -36,3 +37,10 @@ export const handleAddQuestion = ({ optionOne, optionTwo }) => (dispatch, getSta
     });
 };
 
+export const addComment = (qid, comment) => {
+  return {
+    type: ADD_COMMENT,
+    qid,
+    comment
+  }
+}
