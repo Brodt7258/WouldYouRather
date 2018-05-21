@@ -5,6 +5,7 @@ import Paper from 'material-ui-next/Paper';
 import Button from 'material-ui-next/Button';
 import moment from 'moment';
 import Check from 'react-icons/lib/md/check';
+import Reply from 'react-icons/lib/md/reply';
 import { handleCastVote } from '../actions/shared';
 import NotFound from './NotFound';
 import UserAvatar from './UserAvatar';
@@ -23,7 +24,7 @@ class QuestionDetails extends Component {
   };
 
   render() {
-    const { answered = null, question: { optionOne, optionTwo, timestamp, comments } = {}, author = '', notFound, id } = this.props;
+    const { answered = null, question: { optionOne, optionTwo, timestamp } = {}, author = '', notFound, id, comments } = this.props;
 
     if (notFound) {
       return (
@@ -36,11 +37,20 @@ class QuestionDetails extends Component {
     return (
       <div>
         <Card style={{ marginTop: '20px', display: 'flex' }}>
-          <Paper style={{ padding: '20px', flex: '1', backgroundColor: '#b0bec5' }}>
+          <Paper style={{ padding: '20px', flex: '1', backgroundColor: '#b0bec5', display: 'flex', flexDirection: 'column' }}>
             <div style={{ margin: 'auto', textAlign: 'center' }}>
               <UserAvatar uID={author.id} style={{ margin: 'auto', marginBottom: 10 }} />
               <div >{author.name}</div>
               <div>{date}</div>
+            </div>
+            <div style={{ flex: '1' }} />
+            <div style={{ margin: 'auto' }}>
+            {
+              comments &&
+              <div>
+                <Reply /> {comments}
+              </div>
+            }
             </div>
             
           </Paper>
@@ -120,7 +130,10 @@ const mapStateToProps = ({questions, users, authedUser}, props) => {
           ? 'optionTwo' 
           : null,
       question,
-      author: users[question.author]
+      author: users[question.author],
+      comments: question.comments
+        ? Object.keys(question.comments).length
+        : false
     };
   } else {
     return {
