@@ -24,14 +24,14 @@ class CommentForm extends Component {
     const { text } = this.state;
     const { qid, authedUser, dispatch } = this.props;
 
-    const timeStamp = Date.now();
-    const cid = qid + authedUser + timeStamp; //I wouldn't do this for real, but I think it will be fine here.
+    const timestamp = Date.now();
+    const cid = qid + authedUser + timestamp; //I wouldn't do this for real, but I think it will be fine here.
 
     dispatch(addComment(qid,  {
       id: cid,
       author: authedUser,
       text,
-      timeStamp
+      timestamp
      }));
      this.setState({ text: '' });
   }

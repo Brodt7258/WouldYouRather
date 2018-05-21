@@ -10,6 +10,7 @@ import NotFound from './NotFound';
 import UserAvatar from './UserAvatar';
 import VoteChart from './VoteChart';
 import CommentForm from './CommentForm';
+import Comments from './Comments';
 
 class QuestionDetails extends Component {
   handleVote = answer => {
@@ -22,7 +23,7 @@ class QuestionDetails extends Component {
   };
 
   render() {
-    const { answered = null, question: { optionOne, optionTwo, timestamp } = {}, author = '', notFound, id } = this.props;
+    const { answered = null, question: { optionOne, optionTwo, timestamp, comments } = {}, author = '', notFound, id } = this.props;
 
     if (notFound) {
       return (
@@ -97,6 +98,10 @@ class QuestionDetails extends Component {
           answered &&
           <CommentForm qid={id} />
         }
+        {
+          comments &&
+          <Comments qid={id} />
+        }
       </div>
     );
   }
@@ -104,17 +109,18 @@ class QuestionDetails extends Component {
 
 const mapStateToProps = ({questions, users, authedUser}, props) => {
   const { id } = props.match.params;
+  const question = questions[id];
 
-  if (questions[id]) {
+  if (question) {
     return {
       id,
-      answered: questions[id].optionOne.votes.includes(authedUser) 
+      answered: question.optionOne.votes.includes(authedUser) 
         ? 'optionOne' 
-        : questions[id].optionTwo.votes.includes(authedUser) 
+        : question.optionTwo.votes.includes(authedUser) 
           ? 'optionTwo' 
           : null,
-      question: questions[id],
-      author: users[questions[id].author]
+      question,
+      author: users[question.author]
     };
   } else {
     return {
