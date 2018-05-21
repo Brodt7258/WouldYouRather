@@ -61,10 +61,10 @@ class QuestionDetails extends Component {
                 Total Votes: {optionOne.votes.length + optionTwo.votes.length}
               </p>
               <Paper style={{ flex: '1', padding: '20px' }}>
-                Votes for One: {optionOne.votes.length}
+                "{optionOne.text}" votes: {optionOne.votes.length}
               </Paper>
               <Paper style={{ flex: '1', padding: '20px' }}>
-                Votes for Two: {optionTwo.votes.length}
+                "{optionTwo.text}" votes: {optionTwo.votes.length}
               </Paper>
               <VoteChart
                 style={{ flex: 1 }}

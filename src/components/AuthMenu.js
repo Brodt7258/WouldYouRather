@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { setAuthedUser } from '../actions/authedUser';
 import { MenuItem } from 'material-ui-next/Menu';
-import { ListItem, ListItemIcon, ListItemText } from 'material-ui-next/List';
+import { ListItemText } from 'material-ui-next/List';
 import UserAvatar from './UserAvatar';
 
 class AuthMenu extends Component {

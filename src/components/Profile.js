@@ -26,7 +26,7 @@ class Profile extends Component {
         </Card>
 
         <div>
-          <p style={{ fontSize: '1.5em', textAlign: 'center' }}>Asked({asked.length})</p>
+          <p style={{ fontSize: '1.5em', textAlign: 'center' }}>Asked ({asked.length})</p>
         {
           asked &&
           asked.map(q => <Question key={q} id={q} />)
@@ -34,7 +34,7 @@ class Profile extends Component {
         </div>
 
         <div>
-        <p style={{ fontSize: '1.5em', textAlign: 'center' }}>Answered({answered.length})</p>
+        <p style={{ fontSize: '1.5em', textAlign: 'center' }}>Answered ({answered.length})</p>
         {
           answered &&
           answered.map(q => <Question key={q} id={q} />)

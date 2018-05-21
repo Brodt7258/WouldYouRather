@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
-import Paper from 'material-ui-next/Paper';
 import Card, { CardContent } from 'material-ui-next/Card';
 import TextField from 'material-ui-next/TextField';
 import Button from 'material-ui-next/Button';
@@ -55,7 +54,6 @@ class CreateUser extends Component {
   }
 
   render() {
-    const { users } = this.props;
     const { user, done, taken } = this.state;
 
     if(done) {
