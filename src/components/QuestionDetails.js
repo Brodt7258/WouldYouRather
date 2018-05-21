@@ -4,6 +4,7 @@ import Card, { CardContent } from 'material-ui-next/Card';
 import Paper from 'material-ui-next/Paper';
 import Button from 'material-ui-next/Button';
 import moment from 'moment';
+import Check from 'react-icons/lib/md/check';
 import { handleCastVote } from '../actions/shared';
 import NotFound from './NotFound';
 import UserAvatar from './UserAvatar';
@@ -20,8 +21,8 @@ class QuestionDetails extends Component {
   };
 
   render() {
-    const { answered = false, question: { optionOne, optionTwo, timestamp } = {}, author = '', notFound } = this.props;
-    
+    const { answered = null, question: { optionOne, optionTwo, timestamp } = {}, author = '', notFound } = this.props;
+    console.log(answered);
 
     if (notFound) {
       return (
@@ -60,11 +61,27 @@ class QuestionDetails extends Component {
               <p style={{ margin: 'auto', padding: '15px' }}>
                 Total Votes: {optionOne.votes.length + optionTwo.votes.length}
               </p>
-              <Paper style={{ flex: '1', padding: '20px' }}>
-                "{optionOne.text}" votes: {optionOne.votes.length}
+              <Paper style={{ flex: '1', padding: '20px', display: 'flex', margin: '1em' }}>
+                <div style={{ flex: '3' }}>
+                  {optionOne.text}:
+                </div>
+                <div style={{ flex: '1' }}>
+                  {optionOne.votes.length}
+                </div>
+                <div style={{ flex: '1' }}>
+                  {answered === 'optionOne' && <Check />}
+                </div>
               </Paper>
-              <Paper style={{ flex: '1', padding: '20px' }}>
-                "{optionTwo.text}" votes: {optionTwo.votes.length}
+              <Paper style={{ flex: '1', padding: '20px', display: 'flex', margin: '1em' }}>
+                <div style={{ flex: '3' }}>
+                  {optionTwo.text}:
+                </div>
+                <div style={{ flex: '1' }}>
+                  {optionTwo.votes.length}
+                </div>
+                <div style={{ flex: '1' }}>
+                  {answered === 'optionTwo' && <Check />}
+                </div>
               </Paper>
               <VoteChart
                 style={{ flex: 1 }}
@@ -85,7 +102,11 @@ const mapStateToProps = ({questions, users, authedUser}, props) => {
   if (questions[id]) {
     return {
       id,
-      answered: questions[id].optionOne.votes.includes(authedUser) || questions[id].optionTwo.votes.includes(authedUser),
+      answered: questions[id].optionOne.votes.includes(authedUser) 
+        ? 'optionOne' 
+        : questions[id].optionTwo.votes.includes(authedUser) 
+          ? 'optionTwo' 
+          : null,
       question: questions[id],
       author: users[questions[id].author]
     };

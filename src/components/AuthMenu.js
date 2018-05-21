@@ -4,6 +4,8 @@ import { withRouter } from 'react-router-dom';
 import { setAuthedUser } from '../actions/authedUser';
 import { MenuItem } from 'material-ui-next/Menu';
 import { ListItemText } from 'material-ui-next/List';
+import Add from 'react-icons/lib/md/add';
+import Exit from 'react-icons/lib/md/exit-to-app';
 import UserAvatar from './UserAvatar';
 
 class AuthMenu extends Component {
@@ -74,7 +76,9 @@ class AuthMenu extends Component {
                   onClick={() => history.push('/create')}
                   style={{ display: 'flex' }}
                 >
-                  <div style={{ flex: 1 }}></div>
+                  <div style={{ display: 'flex', justifyContent: 'flex-end', flex: 1 }}>
+                    <Add style={{ padding: '10px' }} />
+                  </div>
                   <ListItemText inset style={{ flex: 2 }}>
                     Create New
                   </ListItemText>
@@ -90,7 +94,9 @@ class AuthMenu extends Component {
                     }}
                     style={{ display: 'flex' }}
                   >
-                    <div style={{ flex: 1 }}></div>
+                    <div style={{ display: 'flex', justifyContent: 'flex-end', flex: 1 }}>
+                      <Exit style={{ padding: '10px' }} />
+                    </div>
                     <ListItemText inset style={{ flex: 2 }}>
                       Logout
                     </ListItemText>
