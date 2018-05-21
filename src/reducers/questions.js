@@ -1,4 +1,4 @@
-import { RECEIVE_QUESTIONS, ADD_QUESTION, ADD_COMMENT } from '../actions/questions';
+import { RECEIVE_QUESTIONS, ADD_QUESTION, ADD_COMMENT, TOGGLE_LIKE } from '../actions/questions';
 import { CAST_VOTE } from '../actions/shared';
 
 export default (state = {}, action) => {
@@ -43,6 +43,20 @@ export default (state = {}, action) => {
               ...comment
             }
           }
+        }
+      };
+    }
+    case TOGGLE_LIKE: {
+      const { qid, authedUser, hasLiked } = action;
+      return {
+        ...state,
+        [qid]: {
+          ...state[qid],
+          likes: hasLiked
+            ? state[qid].likes.filter(uid => uid !== authedUser)
+            : state[qid].likes
+              ? state[qid].likes.concat([authedUser])
+              : [authedUser]
         }
       };
     }

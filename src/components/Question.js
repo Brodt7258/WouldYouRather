@@ -5,11 +5,19 @@ import Card, { CardContent } from 'material-ui-next/Card';
 import Paper from 'material-ui-next/Paper';
 import moment from 'moment';
 import Replies from 'react-icons/lib/md/reply';
+import Favorite from 'react-icons/lib/md/favorite';
+import FavoriteOutline from 'react-icons/lib/md/favorite-outline';
 import UserAvatar from './UserAvatar';
 
 class Question extends Component {
   render() {
-    const { question: { id, optionOne, optionTwo, timestamp }, author, comments } = this.props;
+    const { 
+      question: { id, optionOne, optionTwo, timestamp },
+      author,
+      comments,
+      likes,
+      hasLiked } = this.props;
+
     const date = moment(timestamp).format('MMM Do, YYYY | h:mm a');
 
     return (
@@ -24,7 +32,14 @@ class Question extends Component {
               </div>
             </div>
             <div style={{ flex: 1, textAlign: 'right' }}>
-              <div>Likes</div>
+              <div>
+                {
+                  hasLiked
+                  ? <Favorite />
+                  : <FavoriteOutline />
+                }
+                {likes}
+              </div>
               <div>
                 {
                   comments &&
@@ -58,13 +73,19 @@ class Question extends Component {
   }
 }
 
-const mapStateToProps = ({ questions, users }, { id }) => {
+const mapStateToProps = ({ questions, users, authedUser }, { id }) => {
   const question = questions[id];
   return {
     question,
     author: users[question.author],
     comments: question.comments
       ? Object.values(question.comments).length
+      : false,
+    likes: question.likes
+      ? question.likes.length
+      : false,
+    hasLiked: question.likes
+      ? question.likes.includes(authedUser)
       : false
   };
 };

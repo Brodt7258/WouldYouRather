@@ -4,6 +4,7 @@ import { showLoading, hideLoading } from 'react-redux-loading';
 export const RECEIVE_QUESTIONS = 'RECEIVE_QUESTIONS';
 export const ADD_QUESTION = 'ADD_QUESTION';
 export const ADD_COMMENT = 'ADD_COMMENT';
+export const TOGGLE_LIKE = 'TOGGLE_LIKE';
 
 
 export const receiveQuestions = (questions) => {
@@ -42,5 +43,14 @@ export const addComment = (qid, comment) => {
     type: ADD_COMMENT,
     qid,
     comment
-  }
-}
+  };
+};
+
+export const toggleLike = ({ qid, hasLiked, authedUser }) => {
+  return {
+    type: TOGGLE_LIKE,
+    qid,
+    hasLiked,
+    authedUser
+  };
+};

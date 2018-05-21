@@ -6,7 +6,10 @@ import Button from 'material-ui-next/Button';
 import moment from 'moment';
 import Check from 'react-icons/lib/md/check';
 import Reply from 'react-icons/lib/md/reply';
+import Favorite from 'react-icons/lib/md/favorite';
+import FavoriteOutline from 'react-icons/lib/md/favorite-outline';
 import { handleCastVote } from '../actions/shared';
+import { toggleLike } from '../actions/questions';
 import NotFound from './NotFound';
 import UserAvatar from './UserAvatar';
 import VoteChart from './VoteChart';
@@ -21,10 +24,23 @@ class QuestionDetails extends Component {
       qid: id,
       answer
     }));
-  };
+  }
+
+  handleLike = () => {
+    const { authedUser, id, hasLiked, dispatch } = this.props;
+    dispatch(toggleLike({ qid: id, hasLiked, authedUser }));
+  }
 
   render() {
-    const { answered = null, question: { optionOne, optionTwo, timestamp } = {}, author = '', notFound, id, comments } = this.props;
+    const {
+      answered = null,
+      question: { optionOne, optionTwo, timestamp } = {},
+      author = '',
+      notFound,
+      id,
+      comments,
+      likes,
+      hasLiked } = this.props;
 
     if (notFound) {
       return (
@@ -45,6 +61,14 @@ class QuestionDetails extends Component {
             </div>
             <div style={{ flex: '1' }} />
             <div style={{ margin: 'auto' }}>
+              <div onClick={this.handleLike}>
+                {
+                  hasLiked
+                  ? <Favorite />
+                  : <FavoriteOutline />
+                }
+                {likes}
+              </div>
             {
               comments &&
               <div>
@@ -133,7 +157,14 @@ const mapStateToProps = ({questions, users, authedUser}, props) => {
       author: users[question.author],
       comments: question.comments
         ? Object.keys(question.comments).length
-        : false
+        : false,
+      likes: question.likes
+        ? question.likes.length
+        : false,
+      hasLiked: question.likes
+        ? question.likes.includes(authedUser)
+        : false,
+      authedUser
     };
   } else {
     return {
