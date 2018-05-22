@@ -32,9 +32,9 @@ class App extends Component {
               ? null
               : <Switch>
                   <Route path="/" exact component={Dashboard} />
-                  <Route path="/leaderboard" component={Leaderboard} />
                   <Route path="/login" component={Login} />
                   <Route path="/create" component={CreateUser} />
+                  <PrivateRoute path="/leaderboard" component={Leaderboard} />
                   <PrivateRoute path="/new" component={NewQuestion} />
                   <PrivateRoute path="/question/:id" component={QuestionDetails} />
                   <PrivateRoute path="/user/:id" component={Profile} />

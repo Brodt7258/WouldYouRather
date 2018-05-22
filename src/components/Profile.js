@@ -3,10 +3,16 @@ import { connect } from 'react-redux';
 import Card, { CardContent } from 'material-ui-next/Card';
 import Question from './Question';
 import UserAvatar from './UserAvatar';
+import NotFound from './NotFound';
 
 class Profile extends Component {
   render() {
-    const { user, asked, answered } = this.props;
+    const { user, asked, answered, notFound } = this.props;
+
+    if (notFound) {
+      return <NotFound />
+    }
+
     return (
       <div>
         <Card style={{ margin: 'auto', marginTop: '20px', width: '35%' }}>
@@ -49,11 +55,20 @@ const mapStateToProps = ({ users, questions }, props) => {
   const { id } = props.match.params;
   const user = users[id];
 
+  if (!user) {
+    return {
+      notFound: true
+    }
+  }
   return {
     user,
-    asked: user.questions,
-    answered: Object.keys(user.answers)
-  };
+    asked: user.questions
+      ? user.questions
+      : [],
+    answered: user.answers
+      ? Object.keys(user.answers)
+      : []
+  }
 };
 
 export default connect(mapStateToProps)(Profile);

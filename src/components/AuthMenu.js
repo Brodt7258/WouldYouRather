@@ -73,7 +73,10 @@ class AuthMenu extends Component {
                 }
 
                 <MenuItem
-                  onClick={() => history.push('/create')}
+                  onClick={() => {
+                    this.handleClick();
+                    history.push('/create');
+                  }}
                   style={{ display: 'flex' }}
                 >
                   <div style={{ display: 'flex', justifyContent: 'flex-end', flex: 1 }}>

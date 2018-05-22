@@ -59,8 +59,12 @@ const mapStateToProps = ({ users }) => {
       .map(({ id, name, answers, questions }) => ({
         id,
         name,
-        asked: questions.length,
-        answered: Object.keys(answers).length,
+        asked: questions
+          ? questions.length
+          : 0,
+        answered: answers
+          ? Object.keys(answers).length
+          : 0,
       }))
       .sort((a, b) => (b.asked + b.answered) - (a.asked + a.answered))
     : []

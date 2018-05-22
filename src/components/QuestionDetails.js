@@ -40,7 +40,9 @@ class QuestionDetails extends Component {
       id,
       comments,
       likes,
-      hasLiked } = this.props;
+      hasLiked,
+      percentOne,
+      percentTwo } = this.props;
 
     if (notFound) {
       return (
@@ -130,7 +132,7 @@ class QuestionDetails extends Component {
                     {optionOne.text}:
                   </div>
                   <div style={{ flex: '1' }}>
-                    {optionOne.votes.length}
+                    {optionOne.votes.length} ({Math.round(percentOne * 100)}%)
                   </div>
                   <div style={{ flex: '1' }}>
                     {answered === 'optionOne' && <Check />}
@@ -149,7 +151,7 @@ class QuestionDetails extends Component {
                     {optionTwo.text}:
                   </div>
                   <div style={{ flex: '1' }}>
-                    {optionTwo.votes.length}
+                    {optionTwo.votes.length} ({Math.round(percentTwo * 100)}%)
                   </div>
                   <div style={{ flex: '1' }}>
                     {answered === 'optionTwo' && <Check />}
@@ -181,6 +183,10 @@ const mapStateToProps = ({questions, users, authedUser}, props) => {
   const { id } = props.match.params;
   const question = questions[id];
 
+  const totalVotes = question.optionOne.votes.length + question.optionTwo.votes.length;
+  const percentOne = question.optionOne.votes.length / totalVotes;
+  const percentTwo = question.optionTwo.votes.length / totalVotes;
+
   if (question) {
     return {
       id,
@@ -200,7 +206,9 @@ const mapStateToProps = ({questions, users, authedUser}, props) => {
       hasLiked: question.likes
         ? question.likes.includes(authedUser)
         : false,
-      authedUser
+      authedUser,
+      percentOne,
+      percentTwo
     };
   } else {
     return {
