@@ -60,21 +60,23 @@ class QuestionDetails extends Component {
               <div>{date}</div>
             </div>
             <div style={{ flex: '1' }} />
-            <div style={{ margin: 'auto' }}>
-              <div onClick={this.handleLike}>
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr' }}>
+              <div onClick={this.handleLike} style={{ gridColumn: '1', justifySelf: 'center' }}>
                 {
                   hasLiked
                   ? <Favorite />
                   : <FavoriteOutline />
                 }
-                {likes}
+                {likes > 0 && likes}
               </div>
-            {
-              comments &&
-              <div>
-                <Reply /> {comments}
+              <div style={{ gridColumn: '2', justifySelf: 'center' }}>
+              {
+                comments &&
+                <div>
+                  <Reply /> {comments}
+                </div>
+              }
               </div>
-            }
             </div>
             
           </Paper>
@@ -83,10 +85,28 @@ class QuestionDetails extends Component {
               !answered &&
               <div style={{ display: 'flex', flexDirection: 'column' }}>
                 <p style={{ margin: 'auto', padding: '15px' }}>Would you Rather?</p>
-                <Button style={{ flex: '1', padding: '20px' }} onClick={() => this.handleVote('optionOne')}>
+                <Button
+                  variant="raised"
+                  style={{
+                    flex: '1',
+                    padding: '20px',
+                    margin: '1em',
+                    background: 'linear-gradient(178deg, rgb(79,97,175) 0%, #FFF 25%, #FFF 75%, rgb(57,181,191) 100%)'
+                  }}
+                  onClick={() => this.handleVote('optionOne')}
+                >
                   {optionOne.text}
                 </Button>
-                <Button style={{ flex: '1', padding: '20px' }} onClick={() => this.handleVote('optionTwo')}>
+                <Button
+                  variant="raised"
+                  style={{ 
+                    flex: '1',
+                    padding: '20px',
+                    margin: '1em',
+                    background: 'linear-gradient(178deg, rgb(254,146,69) 0%, #FFF 25%, #FFF 75%, rgb(226,55,139) 100%)'
+                  }}
+                  onClick={() => this.handleVote('optionTwo')}
+                >
                   {optionTwo.text}
                 </Button>
               </div>
@@ -97,7 +117,15 @@ class QuestionDetails extends Component {
                 <p style={{ margin: 'auto', padding: '15px' }}>
                   Total Votes: {optionOne.votes.length + optionTwo.votes.length}
                 </p>
-                <Paper style={{ flex: '1', padding: '20px', display: 'flex', margin: '1em' }}>
+                <Paper 
+                  style={{ 
+                    flex: '1',
+                    padding: '20px',
+                    display: 'flex',
+                    margin: '1em',
+                    background: 'linear-gradient(178deg, rgb(79,97,175) 0%, #FFF 25%, #FFF 75%, rgb(57,181,191) 100%)'
+                  }}
+                >
                   <div style={{ flex: '3' }}>
                     {optionOne.text}:
                   </div>
@@ -108,7 +136,15 @@ class QuestionDetails extends Component {
                     {answered === 'optionOne' && <Check />}
                   </div>
                 </Paper>
-                <Paper style={{ flex: '1', padding: '20px', display: 'flex', margin: '1em' }}>
+                <Paper 
+                  style={{ 
+                    flex: '1',
+                    padding: '20px',
+                    display: 'flex',
+                    margin: '1em',
+                    background: 'linear-gradient(178deg, rgb(254,146,69) 0%, #FFF 25%, #FFF 75%, rgb(226,55,139) 100%)'
+                  }}
+                >
                   <div style={{ flex: '3' }}>
                     {optionTwo.text}:
                   </div>
@@ -120,7 +156,7 @@ class QuestionDetails extends Component {
                   </div>
                 </Paper>
                 <VoteChart
-                  style={{ flex: 1 }}
+                  style={{ flex: 1, paddingRight: '30px' }} //this is a total hack, but react-vis doesn't want to play nice and center my chart properly
                   optOneVotes={optionOne.votes.length}
                   optTwoVotes={optionTwo.votes.length}
                 />
@@ -160,7 +196,7 @@ const mapStateToProps = ({questions, users, authedUser}, props) => {
         : false,
       likes: question.likes
         ? question.likes.length
-        : false,
+        : 0,
       hasLiked: question.likes
         ? question.likes.includes(authedUser)
         : false,

@@ -52,7 +52,7 @@ export default (state = {}, action) => {
         ...state,
         [qid]: {
           ...state[qid],
-          likes: hasLiked
+          likes: hasLiked //kind of hacky, but not a feature the data was intended to support.
             ? state[qid].likes.filter(uid => uid !== authedUser)
             : state[qid].likes
               ? state[qid].likes.concat([authedUser])

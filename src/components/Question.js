@@ -38,7 +38,7 @@ class Question extends Component {
                   ? <Favorite />
                   : <FavoriteOutline />
                 }
-                {likes}
+                {likes > 0 && likes}
               </div>
               <div>
                 {
@@ -83,7 +83,7 @@ const mapStateToProps = ({ questions, users, authedUser }, { id }) => {
       : false,
     likes: question.likes
       ? question.likes.length
-      : false,
+      : 0,
     hasLiked: question.likes
       ? question.likes.includes(authedUser)
       : false
