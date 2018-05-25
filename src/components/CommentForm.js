@@ -22,17 +22,17 @@ class CommentForm extends Component {
   handleSubmit = (e) => {
     e.preventDefault();
     const { text } = this.state;
-    const { qid, authedUser, dispatch } = this.props;
+    const { qid, authedUser, addComment } = this.props;
 
     const timestamp = Date.now();
     const cid = qid + authedUser + timestamp; //I wouldn't do this for real, but I think it will be fine here.
 
-    dispatch(addComment(qid,  {
+    addComment(qid,  {
       id: cid,
       author: authedUser,
       text,
       timestamp
-     }));
+     });
      this.setState({ text: '' });
   }
   
@@ -80,4 +80,4 @@ const mapStateToProps = ({ authedUser }, { qid }) => {
   };
 };
 
-export default connect(mapStateToProps)(CommentForm);
+export default connect(mapStateToProps, { addComment })(CommentForm);

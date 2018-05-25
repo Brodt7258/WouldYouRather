@@ -26,9 +26,9 @@ class NewQuestion extends Component {
   handleSubmit = (e) => {
     e.preventDefault();
     const { optionOne, optionTwo } = this.state;
-    const { dispatch } = this.props;
+    const { handleAddQuestion } = this.props;
 
-    dispatch(handleAddQuestion({ optionOne, optionTwo }))
+    handleAddQuestion({ optionOne, optionTwo })
       .then(res => {
         this.setState({
           newQID: res.question.id
@@ -119,4 +119,4 @@ class NewQuestion extends Component {
   }
 }
 
-export default connect()(NewQuestion);
+export default connect(null, { handleAddQuestion })(NewQuestion);

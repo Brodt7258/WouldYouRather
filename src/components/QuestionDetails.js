@@ -18,17 +18,17 @@ import Comments from './Comments';
 
 class QuestionDetails extends Component {
   handleVote = answer => {
-    const { id, dispatch } = this.props;
+    const { id, handleCastVote } = this.props;
 
-    dispatch(handleCastVote({
+    handleCastVote({
       qid: id,
       answer
-    }));
+    });
   }
 
   handleLike = () => {
-    const { authedUser, id, hasLiked, dispatch } = this.props;
-    dispatch(toggleLike({ qid: id, hasLiked, authedUser }));
+    const { authedUser, id, hasLiked, toggleLike } = this.props;
+    toggleLike({ qid: id, hasLiked, authedUser });
   }
 
   render() {
@@ -183,11 +183,12 @@ const mapStateToProps = ({questions, users, authedUser}, props) => {
   const { id } = props.match.params;
   const question = questions[id];
 
-  const totalVotes = question.optionOne.votes.length + question.optionTwo.votes.length;
-  const percentOne = question.optionOne.votes.length / totalVotes;
-  const percentTwo = question.optionTwo.votes.length / totalVotes;
-
   if (question) {
+
+    const totalVotes = question.optionOne.votes.length + question.optionTwo.votes.length;
+    const percentOne = question.optionOne.votes.length / totalVotes;
+    const percentTwo = question.optionTwo.votes.length / totalVotes;
+
     return {
       id,
       answered: question.optionOne.votes.includes(authedUser) 
@@ -219,4 +220,4 @@ const mapStateToProps = ({questions, users, authedUser}, props) => {
   
 };
 
-export default connect(mapStateToProps)(QuestionDetails);
+export default connect(mapStateToProps, { toggleLike, handleCastVote })(QuestionDetails);

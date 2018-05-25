@@ -10,17 +10,16 @@ import UserAvatar from './UserAvatar';
 
 class AuthMenu extends Component {
   handleSetUser = id => {
-    const { dispatch } = this.props;
+    const { setAuthedUser } = this.props;
 
-    dispatch(setAuthedUser(id));
+    setAuthedUser(id);
     this.setState({ anchorEl: null });
   }
 
   handleClick = () => {
     const { handleLoggedIn = null } = this.props;
-    if (handleLoggedIn) {
-      handleLoggedIn();
-    }
+    handleLoggedIn();
+
   }
 
   render() {
@@ -123,4 +122,4 @@ const mapStateToProps = ({ users, authedUser }, props) => {
   };
 };
 
-export default withRouter(connect(mapStateToProps)(AuthMenu));
+export default withRouter(connect(mapStateToProps, { setAuthedUser })(AuthMenu));

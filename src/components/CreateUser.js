@@ -20,14 +20,14 @@ class CreateUser extends Component {
   NAME_MAX = 20;
   
   handleCreateUser = (e) => {
-    const { dispatch } = this.props;
+    const { createUser, setAuthedUser } = this.props;
     const { user, taken } = this.state;
 
     e.preventDefault();
 
     if (!taken) {
-      dispatch(createUser(user));
-      dispatch(setAuthedUser(user.id));
+      createUser(user);
+      setAuthedUser(user.id);
       this.setState({ done: true });
     }
   }
@@ -104,4 +104,4 @@ const mapStateToProps = ({ users }) => {
   }
 }
 
-export default connect(mapStateToProps)(CreateUser);
+export default connect(mapStateToProps, { createUser, setAuthedUser })(CreateUser);
