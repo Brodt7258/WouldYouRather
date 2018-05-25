@@ -1,4 +1,4 @@
-import { IS_LOADED } from '../actions/loading';
+import { IS_LOADED } from '../actions/types';
 
 export default (state = true, action) => {
   switch (action.type) {

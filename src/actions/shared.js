@@ -6,7 +6,7 @@ import { setLoaded } from './loading';
 import { showLoading, hideLoading } from 'react-redux-loading';
 import { saveVote } from '../utils/api';
 
-export const CAST_VOTE = 'CAST_VOTE';
+import { CAST_VOTE } from './types';
 
 export const handleInitialData = () => (dispatch) => {
   dispatch(showLoading());

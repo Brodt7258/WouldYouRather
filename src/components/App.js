@@ -31,7 +31,7 @@ class App extends Component {
               isLoading
               ? null
               : <Switch>
-                  <Route path="/" exact component={Dashboard} />
+                  <PrivateRoute path="/" exact component={Dashboard} />
                   <Route path="/login" component={Login} />
                   <Route path="/create" component={CreateUser} />
                   <PrivateRoute path="/leaderboard" component={Leaderboard} />

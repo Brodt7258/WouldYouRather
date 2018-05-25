@@ -1,5 +1,5 @@
 import { RECEIVE_USERS, CREATE_USER } from '../actions/users';
-import { CAST_VOTE } from '../actions/shared';
+import { CAST_VOTE } from '../actions/types';
 
 export default (state = {}, action) => {
   switch (action.type) {

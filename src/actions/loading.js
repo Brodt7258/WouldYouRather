@@ -1,4 +1,4 @@
-export const IS_LOADED = 'IS_LOADED';
+import { IS_LOADED } from './types';
 
 export const setLoaded = () => {
   return {

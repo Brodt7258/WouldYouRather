@@ -1,11 +1,7 @@
 import { saveQuestion } from '../utils/api';
 import { showLoading, hideLoading } from 'react-redux-loading';
 
-export const RECEIVE_QUESTIONS = 'RECEIVE_QUESTIONS';
-export const ADD_QUESTION = 'ADD_QUESTION';
-export const ADD_COMMENT = 'ADD_COMMENT';
-export const TOGGLE_LIKE = 'TOGGLE_LIKE';
-
+import { RECEIVE_QUESTIONS, ADD_QUESTION, ADD_COMMENT, TOGGLE_LIKE } from './types';
 
 export const receiveQuestions = (questions) => {
   return {

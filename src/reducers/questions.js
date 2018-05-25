@@ -1,5 +1,5 @@
-import { RECEIVE_QUESTIONS, ADD_QUESTION, ADD_COMMENT, TOGGLE_LIKE } from '../actions/questions';
-import { CAST_VOTE } from '../actions/shared';
+import { RECEIVE_QUESTIONS, ADD_QUESTION, ADD_COMMENT, TOGGLE_LIKE } from '../actions/types';
+import { CAST_VOTE } from '../actions/types';
 
 export default (state = {}, action) => {
   switch (action.type) {
