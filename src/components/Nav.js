@@ -1,6 +1,5 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
 import Toolbar from 'material-ui-next/Toolbar';
 import Button from 'material-ui-next/Button';
 import Avatar from 'material-ui-next/Avatar';
@@ -9,11 +8,7 @@ import logo from '../images/icon-01.png';
 import NavAuth from './NavAuth';
 
 
-class Nav extends Component {
-  
-  render() {
-
-    return (
+const Nav = () => (
       <AppBar position="static" >
         <Toolbar>
           <Avatar src={logo} alt="Would you Rather..?" component={Link} to="/" style={{ marginRight: 15 }} />
@@ -33,7 +28,5 @@ class Nav extends Component {
       </AppBar>
       
     );
-  }
-}
 
 export default Nav;
